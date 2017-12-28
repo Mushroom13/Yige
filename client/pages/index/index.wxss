@@ -1,0 +1,87 @@
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;   
+}
+
+.header{
+  border-left-width: 2px;
+  border-left-style: solid;
+  border-left-color: #cd3b3b;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding-left: 2%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.text-all{
+  color: #cd3b3b;
+  font-size: 12px;
+  padding-right:15px; 
+}
+
+.content{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.content-item{
+  height: 150px;
+  width: 45%;
+  margin: 4px;
+  position: relative;
+}
+
+.content-item image{
+  width: 100%;
+  height: 100%;
+}
+
+.content-item-text{
+  position: absolute;
+  bottom: 0px;
+  color: white;
+  font-size: 15px;
+  background: -webkit-linear-gradient(bottom,rgba(0,0,0,0.5),rgba(0,0,0,0));
+  height: 35px;
+  width:59%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 40%;
+  padding-right: 1%;
+  padding-bottom: 1%;
+}
+.slide-image{
+  width: 100%;
+}
+.selection{
+  border-bottom: 4px solid #ddd;
+}
+.head{
+  margin-bottom: 15px;
+}
+.text-header{
+  font-size: 18px;
+  color:grey;
+}

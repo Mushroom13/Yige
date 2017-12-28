@@ -1,0 +1,16 @@
+<view class="selection">
+  <view class="content">
+    <view class="list-item">
+      <image class="list-item-image" src="../../images/home1.png" />
+      <text >描述</text>
+    </view>
+    <view class="list-item">
+      <image class="list-item-image" src="../../images/home1.png" />
+      <text >描述</text>
+    </view>
+     <view class="list-item">
+      <image class="list-item-image" src="../../images/home1.png" />
+      <text >描述</text>
+    </view> 
+  </view>
+</view>
