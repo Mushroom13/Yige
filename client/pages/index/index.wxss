@@ -46,7 +46,7 @@
 }
 
 .content-item{
-  height: 150px;
+  height: 120px;
   width: 45%;
   margin: 4px;
   position: relative;
@@ -73,7 +73,9 @@
   padding-bottom: 1%;
 }
 .slide-image{
-  width: 100%;
+  width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 .selection{
   border-bottom: 4px solid #ddd;

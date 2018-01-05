@@ -1,4 +1,4 @@
-// pages/like/like.js
+// pages/detail/detail.js
 Page({
 
   /**
@@ -62,10 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-  onTouchDetail: function (event) {
-    wx.navigateTo({
-      url: '../detail/detail',
-    })
   }
 })

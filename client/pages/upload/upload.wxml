@@ -1,2 +1,25 @@
-<!--pages/upload/upload.wxml-->
-<text>pages/upload/upload.wxml</text>
+<view class="selection">
+  <view class="content">
+    <view class="content-item" catchtap="onTouch">
+      <image src="../../images/2.jpg" />
+      <view>
+        <text class="content-item-text">
+          本地图片上传
+        </text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="selection">
+  <view class="content">
+    <view class="content-item2">
+      <view class="section">
+        <input placeholder="" focus="{{focus}}" />
+        <view class="btn-area">
+          <button class="buttontext" bindtap="bindButtonTap">链接上传</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

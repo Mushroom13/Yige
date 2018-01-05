@@ -1,0 +1,20 @@
+<!--pages/personal/personal.wxml-->
+<view class="head">
+  <image  src="../../images/3.jpg" />
+</view>
+
+<view class="section">
+  <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array2}}">
+    <view class="picker">
+      性别：{{array2[index2]}}
+    </view>
+  </picker>
+</view>
+
+<view class="section">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+      年龄：{{array[index]}}
+    </view>
+  </picker>
+</view>

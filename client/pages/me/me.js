@@ -54,6 +54,10 @@ Page({
     wx.navigateTo({
       url: '../like/like',
     })
+  },
+ onTouchPersonal: function (event) {
+    wx.navigateTo({
+      url: '../personal/personal',
+    })
   }
- 
 })

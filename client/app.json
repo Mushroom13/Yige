@@ -1,39 +1,46 @@
 {
-  "pages":[
- 
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/me/me",
+  "pages": [
     "pages/all/all",
+    "pages/detail/detail",
+    "pages/me/me",
+    
+    "pages/index/index",
+    "pages/like/like",
+    "pages/logs/logs",  
     "pages/upload/upload",
-    "pages/like/like"
+    "pages/personal/personal",
+    "pages/all/subtype/subtype1/subtype1"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "一个衣橱",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "backgroundColor": "#fbfbfb",
     "borderStyle": "white",
-    "selectedColor":"#a81717",
+    "selectedColor": "#a81717",
     "color": "#aaa",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "衣橱",
-      "iconPath": "images/home.png",
-      "selectedIconPath": "images/home-hl.png"
-    },{
-      "pagePath": "pages/upload/upload",
-      "text": "添加",
-      "iconPath": "images/add.png",
-      "selectedIconPath": "images/add-hl.png"
-    },{
-      "pagePath": "pages/me/me",
-      "text": "我的",
-      "iconPath": "images/user.png",
-      "selectedIconPath": "images/user-hl.png"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "衣橱",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-hl.png"
+      },
+      {
+        "pagePath": "pages/upload/upload",
+        "text": "添加",
+        "iconPath": "images/add.png",
+        "selectedIconPath": "images/add-hl.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user-hl.png"
+      }
+    ]
   }
 }

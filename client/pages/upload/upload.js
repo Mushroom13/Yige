@@ -3,11 +3,32 @@ Page({
 
   /**
    * 页面的初始数据
-   */
-  data: {
+  //  */
+  // data: {
   
+  // },
+  onTouch: function (event) {
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        var tempFilePaths = res.tempFilePaths
+        wx.uploadFile({
+          url: '', //仅为示例，非真实的接口地址
+          filePath: tempFilePaths[0],
+          name: 'file',
+          formData: {
+            'user': 'test'
+          },
+          success: function (res) {
+            var data = res.data
+            //do something
+          }
+        })
+      }
+    })
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -62,5 +83,14 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  data: {
+    focus: false,
+    inputValue: ''
+  },
+  bindButtonTap: function () {
+    this.setData({
+      focus: true
+    })
   }
 })
