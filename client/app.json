@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/all/all",
     "pages/detail/detail",
     "pages/me/me",
     
-    "pages/index/index",
+    
     "pages/like/like",
     "pages/logs/logs",  
     "pages/upload/upload",

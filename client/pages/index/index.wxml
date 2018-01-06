@@ -19,16 +19,16 @@
     <text class="text-all" catchtap="onTouch" id="1">全部衣物</text>
   </view>
   <view class="content">
-     <view class="content-item" > 
+     <view class="content-item" catchtap="onTouch" id="2"> 
       <image src="../../images/home1.png" />
       <view>
-        <text class="content-item-text">
+        <text class="content-item-text" >
           上衣
         </text>
       </view>
     </view>
 
-     <view class="content-item">
+     <view class="content-item" catchtap="onTouch" id="3">
       <image src="../../images/home2.png" />
       <view>
         <text class="content-item-text">
@@ -36,7 +36,7 @@
         </text>
       </view>
     </view>
-    <view class="content-item">
+    <view class="content-item" catchtap="onTouch" id="4">
       <image src="../../images/home3.png" />
       <view>
         <text class="content-item-text">
@@ -44,7 +44,7 @@
         </text>
       </view>
     </view>
-    <view class="content-item">
+    <view class="content-item" catchtap="onTouch" id="5">
       <image src="../../images/home4.png" />
       <view>
         <text class="content-item-text">

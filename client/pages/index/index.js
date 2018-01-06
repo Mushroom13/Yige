@@ -59,7 +59,7 @@ Page({
   },
   onTouch:function(event){
     wx.navigateTo({
-      url: '../all/all',
+      url: '../all/all?nowid=' + event.currentTarget.id,
     })
   },
    onTouchLike: function (event) {

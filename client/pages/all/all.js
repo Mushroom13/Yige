@@ -63,10 +63,16 @@ Page({
         cate_name: "外套",
         ishaveChild: false,
         children: []
+      },
+      {
+        cate_id: 5,
+        cate_name: "鞋子",
+        ishaveChild: false,
+        children: []
       }
     ],
     curNav: 1,
-    curIndex:1
+    curIndex:0
   },
   switchRightTab: function (e) {
     // 获取item项的id，和数组的下标值  
@@ -82,8 +88,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
-  },
+    this.setData({
+      curNav: options.nowid,
+      curIndex: options.nowid-1
+    })
+  }    ,
 
   /**
    * 生命周期函数--监听页面初次渲染完成
