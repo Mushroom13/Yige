@@ -1,4 +1,5 @@
 // pages/personal/personal.js
+const app = getApp()
 Page({
 
   /**
@@ -12,7 +13,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      ageindex: app.globalData.age,
+      sexindex: app.globalData.sex
+    })
   },
 
   /**
@@ -64,18 +68,22 @@ Page({
 
   },
   data: {
-    array2: ['男', '女',],
+    array2: ['保密','男', '女',],
     objectArray2: [
       {
         id: 0,
-        name: '男'
+        name: '保密'
       },
       {
         id: 1,
+        name: '男'
+      },
+      {
+        id: 2,
         name: '女'
       },
     ],
-    index2: 0,
+    sexindex: 0,
 
     array: ['0-5', '6-10', '11-15', '16-20', '21-25', '26-30', '31-35', '36-40', '41-45', '46-50', '51-55', '56-60', '61-65', '66-70', '71-75', '76-80', '80以上',],
     objectArray: [
@@ -148,19 +156,19 @@ Page({
         name: '80以上'
       },
     ],
-    index: 0,
+    ageindex: 0,
   },
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      index: e.detail.value
+      sexindex: e.detail.value
     })
   },
 
   bindPickerChange2: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      index2: e.detail.value
+      ageindex: e.detail.value
     })
   },
 })

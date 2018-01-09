@@ -69,6 +69,12 @@ Page({
         cate_name: "鞋子",
         ishaveChild: false,
         children: []
+      },
+      {
+        cate_id: 6,
+        cate_name: "其他",
+        ishaveChild: false,
+        children: []
       }
     ],
     curNav: 1,

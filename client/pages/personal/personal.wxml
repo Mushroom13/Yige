@@ -4,17 +4,17 @@
 </view>
 
 <view class="section">
-  <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array2}}">
+  <picker bindchange="bindPickerChange2" value="{{sexindex}}" range="{{array2}}">
     <view class="picker">
-      性别：{{array2[index2]}}
+      性别：{{array2[sexindex]}}
     </view>
   </picker>
 </view>
 
 <view class="section">
-  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+  <picker bindchange="bindPickerChange" value="{{ageindex}}" range="{{array}}">
     <view class="picker">
-      年龄：{{array[index]}}
+      年龄：{{array[ageindex]}}
     </view>
   </picker>
 </view>

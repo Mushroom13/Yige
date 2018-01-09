@@ -1,16 +1,15 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/all/all",
     "pages/detail/detail",
     "pages/me/me",
-    
-    
     "pages/like/like",
-    "pages/logs/logs",  
+    "pages/logs/logs",
     "pages/upload/upload",
-    "pages/personal/personal",
-    "pages/all/subtype/subtype1/subtype1"
+    "pages/personal/personal"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

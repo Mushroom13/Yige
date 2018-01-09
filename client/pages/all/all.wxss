@@ -82,7 +82,7 @@ page {
 .nav_left .nav_left_items.active {
   /*背景色变成白色*/
   background: #fff;
-  color: #f0145a;
+  color: #cd3b3b;
 }
 
 /*右侧栏主盒子*/
