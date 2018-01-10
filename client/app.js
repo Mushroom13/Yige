@@ -8,7 +8,8 @@ App({
   globalData: {
     userInfo: null,
     sex:0,
-    age:0
+    age:0,
+    hosturl: config.service.hostUrl
   },
   onLaunch: function () {
     
@@ -27,7 +28,7 @@ App({
 
     //设置会话服务Url
     qcloud.setLoginUrl(config.service.loginUrl)
-   
+    
   }
   
 })

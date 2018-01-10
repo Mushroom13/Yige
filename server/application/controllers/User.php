@@ -31,4 +31,31 @@ class User extends CI_Controller {
             ]);
         }
     }
+
+    public function setsex()
+    {
+        $openid=$this->input->post('openid');
+        $sex=$this->input->post('sex');
+        if($this->UserModel->setSex($openid,$sex))
+        {
+            echo 'true:1';
+        }
+        else
+        {
+            echo 'false:更新失败';
+        }
+    }
+    public function setage()
+    {
+        $openid=$this->input->post('openid');
+        $age=$this->input->post('age');
+        if($this->UserModel->setAge($openid,$age))
+        {
+            echo 'true:1';
+        }
+        else
+        {
+            echo 'false:更新失败';
+        }
+    }
 }

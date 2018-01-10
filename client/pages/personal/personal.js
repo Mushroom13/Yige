@@ -1,4 +1,5 @@
 // pages/personal/personal.js
+var util = require('../../utils/util.js')
 const app = getApp()
 Page({
 
@@ -160,15 +161,58 @@ Page({
   },
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      sexindex: e.detail.value
+    var that = this;
+    wx.request({
+      url: app.globalData.hosturl +'user/setage',
+      method: 'POST',
+      data: {
+        openid: app.globalData.userInfo.openId,
+        age: e.detail.value
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        var resArray = res.data.toString().split(":");
+        if (resArray[0] == 'true') {
+          that.setData({
+            ageindex: e.detail.value
+          })
+          app.globalData.age = e.detail.value
+        }
+        else {
+          util.showModel('更新失败', resArray[1])
+        }
+      }
     })
+    
   },
 
   bindPickerChange2: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      ageindex: e.detail.value
+    var that = this;
+    wx.request({
+      url: app.globalData.hosturl + 'user/setsex',
+      method: 'POST',
+      data: {
+        openid: app.globalData.userInfo.openId,
+        sex: e.detail.value
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        var resArray = res.data.toString().split(":");
+        if (resArray[0] == 'true') {
+          that.setData({
+            sexindex: e.detail.value
+          })
+          app.globalData.sex = e.detail.value
+        }
+        else {
+          util.showModel('更新失败', resArray[1])
+        }
+      }
     })
   },
 })

@@ -36,5 +36,19 @@ class UserModel extends CI_Model
         $query = $this->db->get_where('user', array('openid' => $openid));
         return $query->row_array();
     }
+    public function setAge($openid,$age)
+    {
+        $data = array(
+            'age' => $age,
+        );
+        return $this->db->update('user',$data,array('openid'=>$openid));
+    }
+    public function setSex($openid,$sex)
+    {
+        $data = array(
+            'sex' => $sex,
+        );
+        return $this->db->update('user',$data,array('openid'=>$openid));
+    }
 
 }
