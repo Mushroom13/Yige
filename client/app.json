@@ -6,10 +6,10 @@
     "pages/detail/detail",
     "pages/me/me",
     "pages/like/like",
-    "pages/logs/logs",
     "pages/upload/upload",
-    "pages/personal/personal"
-    
+    "pages/personal/personal",
+    "pages/clothe/clothe",
+    "pages/statistics/statistics"
   ],
   "window": {
     "backgroundTextStyle": "light",

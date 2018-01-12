@@ -89,8 +89,8 @@ Page({
     inputValue: ''
   },
   bindButtonTap: function () {
-    this.setData({
-      focus: true
+    wx.navigateTo({
+      url: '../clothe/clothe'
     })
   }
 })

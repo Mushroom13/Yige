@@ -1,0 +1,69 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="content-img">
+      <image style="width: 280px; height: 280px; background-color: #eeeeee;" mode="aspectFit" src="../../images/shangyi.jpg"></image>
+    </view>
+    <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd">描述</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__title weui-media-box__title_in-text">上衣</view>
+          <view class="weui-media-box__desc">BE短袖卫衣男连帽薄款 半袖韩版潮流学生夏季外套开衫纯棉t恤网纱</view>
+        </view>
+      </view>
+      <view class="weui-panel__ft">
+        <view class="weui-cell weui-cell_access weui-cell_link">
+          <view class="weui-cell__bd">修改</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-panel">
+      <view class="weui-panel__hd">属性</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+          <view class="weui-cells weui-cells_in-small-appmsg">
+          <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              
+              <view class="weui-cell__bd weui-cell_primary">
+                <view class="star">
+      <block wx:for="{{stars}}" wx:key="item.id">
+        <image class="star-image" style="left: {{item*30}}rpx " src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
+          <view class="item" style="left:0rpx" data-key="{{item+0.5}}" ></view>
+          <view class="item" style="left:15rpx" data-key="{{item+1}}" ></view>
+        </image>
+      </block>
+    </view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image src="../../images/blue.jpg" style="width: 20px;height: 20px;margin-right: 5px" />
+              </view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>蓝色</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image src="../../images/winner.jpg" style="width: 20px;height: 20px;margin-right: 5px" />
+              </view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>冬季</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="button-sp-area">
+      <button class="weui-btn" type="warn">删除</button>
+      <button class="weui-btn" type="primary">推荐搭配</button>
+    </view>
+    
+  </view>
+</view>
