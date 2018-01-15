@@ -1,5 +1,4 @@
 // pages/personal/personal.js
-var util = require('../../utils/util.js')
 const app = getApp()
 Page({
 
@@ -163,7 +162,7 @@ Page({
     console.log('picker发送选择改变，携带值为', e.detail.value)
     var that = this;
     wx.request({
-      url: app.globalData.hosturl +'user/setage',
+      url: app.globalData.hosturl + 'user/setage',
       method: 'POST',
       data: {
         openid: app.globalData.userInfo.openId,
@@ -185,7 +184,7 @@ Page({
         }
       }
     })
-    
+
   },
 
   bindPickerChange2: function (e) {

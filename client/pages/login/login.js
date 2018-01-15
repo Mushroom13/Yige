@@ -9,7 +9,6 @@ Page({
     logged: false
   },
   onLoad: function () {
-    var that = this
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -24,9 +23,6 @@ Page({
               app.globalData.userInfo = result.data.data
               app.globalData.sex = result.data.sex
               app.globalData.age = result.data.age
-              that.setData({
-                logged: true
-              })
               wx.switchTab({
                 url: '../index/index'
               })

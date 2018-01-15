@@ -1,4 +1,8 @@
 // pages/upload/upload.js
+var util = require('../../utils/util.js')
+var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var config = require('../../config')
+const app = getApp()
 Page({
 
   /**
@@ -84,13 +88,82 @@ Page({
   onShareAppMessage: function () {
   
   },
+  // 上传图片接口
+  doUpload: function () {
+    var that = this
+
+    // 选择图片
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        util.showBusy('正在上传')
+        var filePath = res.tempFilePaths[0]
+
+        // 上传图片
+        wx.uploadFile({
+          url: config.service.uploadUrl,
+          filePath: filePath,
+          name: 'file',
+
+          success: function (res) {
+            util.showSuccess('上传图片成功')
+            res = JSON.parse(res.data)
+            that.setData({
+              imgUrl: res.data.imgUrl
+            })
+          },
+
+          fail: function (e) {
+            util.showModel('上传图片失败')
+          }
+        })
+
+      },
+      fail: function (e) {
+        console.error(e)
+      }
+    })
+  },
+
+  // 预览图片
+  previewImg: function () {
+    wx.previewImage({
+      current: this.data.imgUrl,
+      urls: [this.data.imgUrl]
+    })
+  },
+
   data: {
     focus: false,
-    inputValue: ''
+    inputValue: '',
+    imgUrl:''
   },
   bindButtonTap: function () {
-    wx.navigateTo({
-      url: '../clothe/clothe'
+    var that = this;
+    wx.request({
+      url: app.globalData.hosturl + 'upload/addClothe',
+      method: 'POST',
+      data: {
+        openid: app.globalData.userInfo.openId,
+        url: that.data.imgUrl
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        var resArray = res.data.toString().split(":");
+        if (resArray[0] == 'true') {
+          wx.navigateTo({
+            url: '../clothe/clothe?cid=' + resArray[1]
+          })
+        }
+        else {
+          util.showModel('上传失败', resArray[1])
+        }
+      }
     })
+    
   }
 })

@@ -1,4 +1,24 @@
+<import src="/wxSearch/wxSearch.wxml" />
+<template is="wxSearch" data="{{wxSearchData}}" />
+
 <view class="container">
+
+  <view class="nav_top">
+    <import src="../../wxSearch/wxSearch.wxml" />
+    <view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{wxSearchData.value}}" bindfocus="wxSerchFocus" bindinput="wxSearchInput" bindblur="wxSearchBlur" />
+          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+      </view>
+    </view>
+    <template is="wxSearch" data="{{wxSearchData}}" />
+  </view>
+
   <view class="nav_left">
     <block wx:for="{{cateItems}}">
       <!--当前项的id等于item项的id，那个就是当前状态-->
@@ -13,7 +33,7 @@
       <block wx:for="{{cateItems[curIndex].children}}">
         <view class="nav_right_items">
           <!--界面跳转 -->
-          <navigator url="../detail/detail">
+          <navigator url="../clothe/clothe">
             <image src="{{item.image}}"></image>
             <text>{{item.name}}</text>
           </navigator>

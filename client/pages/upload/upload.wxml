@@ -3,10 +3,27 @@
     <text class="text-header">图片上传</text>
   </view>
 
+
   <view class="content">
-    <view class="content-item" catchtap="onTouch">
-      <image src="../../images/2.jpg" />
+  <view class="uploader">
+        <view class="uploader-text" bindtap="doUpload">
+            <text>上传图片</text>
+        </view>
+        <view class="uploader-container" wx:if="{{imgUrl}}">
+            <image
+                class="uploader-image"
+                src="{{imgUrl}}"
+                mode="aspectFit"
+                bindtap="previewImg"
+            ></image>
+            <view class="btn-area">
+          <button class="buttontext" bindtap="bindButtonTap">上传</button>
+        </view>
+        </view>
     </view>
+    <!-- <view class="content-item" catchtap="onTouch">
+      <image src="../../images/2.jpg" />
+    </view> -->
   </view>
 </view>
 

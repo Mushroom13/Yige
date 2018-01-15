@@ -65,7 +65,7 @@ Page({
   },
   onTouchDetail: function (event) {
     wx.navigateTo({
-      url: '../detail/detail',
+      url: '../clothe/clothe',
     })
   }
 })
