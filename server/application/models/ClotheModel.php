@@ -35,5 +35,34 @@ class ClotheModel extends CI_Model
         $query = $this->db->get_where('clothe', array('clotheid' => $clotheid));
         return $query->row_array();
     }
-
+    public function setlocation($clotheid,$location){
+        $data = array(
+            'location' => $location,
+        );
+        return $this->db->update('clothe',$data,array('clotheid'=>$clotheid));
+    }
+    public function settype($clotheid,$type){
+        $data = array(
+            'clothetype' => $type,
+        );
+        return $this->db->update('clothe',$data,array('clotheid'=>$clotheid));
+    }
+    public function setseason($clotheid,$season){
+        $data = array(
+            'clotheseason' => $season,
+        );
+        return $this->db->update('clothe',$data,array('clotheid'=>$clotheid));
+    }
+    public function setcolor($clotheid,$color){
+        $data = array(
+            'clothecolor' => $color,
+        );
+        return $this->db->update('clothe',$data,array('clotheid'=>$clotheid));
+    }
+    public function setstar($clotheid,$key){
+        $data = array(
+            'clothestar' => $key,
+        );
+        return $this->db->update('clothe',$data,array('clotheid'=>$clotheid));
+    }
 }

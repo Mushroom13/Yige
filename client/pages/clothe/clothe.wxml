@@ -5,12 +5,27 @@
     </view>
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd">描述</view>
+       
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text">
-          <view class="weui-media-box__title weui-media-box__title_in-text"> {{typearray[clothetype]}}</view>
+          <!-- <view class="weui-media-box__title weui-media-box__title_in-text"> {{typearray[clothetype]}}</view> -->
+          <picker bindchange="bindPickerChange_type" value="{{typeindex}}" range="{{typearray}}">
+            <view class="picker">{{typearray[typeindex]}}</view>
+          </picker>
           <view class="weui-media-box__desc">{{clothedetail}}</view>
         </view>
-      </view>
+      </view> 
+
+      <!-- <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__bd weui-cell_primary">
+          <picker bindchange="bindPickerChange_color" value="{{typeindex}}" range="{{typearray}}">
+            <view class="picker">{{typearray[typeindex]}}</view>
+          </picker>
+          <view class="weui-media-box__desc">{{clothedetail}}</view>
+        </view>
+      </navigator> -->
+
+
       <view class="weui-panel__ft">
         <view class="weui-cell weui-cell_access weui-cell_link">
           <view class="weui-cell__bd" bindtap="showDialogBtn">修改</view>

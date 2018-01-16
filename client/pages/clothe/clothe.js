@@ -1,4 +1,7 @@
 // pages/clothe/clothe.js
+var util = require('../../utils/util.js')
+var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var config = require('../../config')
 const app = getApp()
 Page({
 
@@ -6,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    cid:0,//就是这个
     showModal: false,
     stars: [0, 1, 2, 3, 4],
     normalSrc: '../../images/normal.png',
@@ -13,8 +17,9 @@ Page({
     halfSrc: '../../images/half.png',
     key: 0,//评分
     imgUrl:'',
-    clothetype:'',
+    // clothetype:'',
     clothedetail:'',
+
     locationarray: ['我的衣橱', '我的收藏',],
     objectLocationArray: [
       {
@@ -51,7 +56,7 @@ Page({
         name: '其他'
       },
     ],
-    clothetype: 0,
+    typeindex: 0,
 
     seasonarray: ['春秋', '夏季','冬季'],
     objectSeasonArray: [
@@ -117,29 +122,145 @@ Page({
   },
   bindPickerChange_location: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      locationindex: e.detail.value
+    var that = this;
+    wx.request({
+      url: app.globalData.hosturl + 'clothe/setlocation',
+      method: 'POST',
+      data: {
+        clotheid: that.data.cid,
+        location: e.detail.value,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log(res)
+        var resArray = res.data.toString().split(":");
+        if (resArray[0] == 'true') {
+          that.setData({
+            locationindex: e.detail.value
+          })
+        }
+        else {
+          util.showModel('修改失败', resArray[1])
+        }
+      }
+    })
+  },
+  bindPickerChange_type: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    var that = this;
+    wx.request({
+      url: app.globalData.hosturl + 'clothe/setType',
+      method: 'POST',
+      data: {
+        clotheid: that.data.cid,
+        clothetype: e.detail.value,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log(res)
+        var resArray = res.data.toString().split(":");
+        if (resArray[0] == 'true') {
+          that.setData({
+            typeindex: e.detail.value
+          })
+        }
+        else {
+          util.showModel('修改失败', resArray[1])
+        }
+      }
     })
   },
   bindPickerChange_season: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      seasonindex: e.detail.value
+    var that = this;
+    wx.request({
+      url: app.globalData.hosturl + 'clothe/setSeason',
+      method: 'POST',
+      data: {
+        clotheid: that.data.cid,
+        clotheseason: e.detail.value,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log(res)
+        var resArray = res.data.toString().split(":");
+        if (resArray[0] == 'true') {
+          that.setData({
+            seasonindex: e.detail.value
+          })
+        }
+        else {
+          util.showModel('修改失败', resArray[1])
+        }
+      }
     })
   },
   bindPickerChange_color: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      colorindex: e.detail.value
+    var that = this;
+    wx.request({
+      url: app.globalData.hosturl + 'clothe/setColor',
+      method: 'POST',
+      data: {
+        clotheid: that.data.cid,
+        clothecolor: e.detail.value,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log(res)
+        var resArray = res.data.toString().split(":");
+        if (resArray[0] == 'true') {
+          that.setData({
+            colorindex: e.detail.value
+          })
+        }
+        else {
+          util.showModel('修改失败', resArray[1])
+        }
+      }
     })
   },
   selectLeft: function (e) {
-    var key = e.currentTarget.dataset.key
+    var key = e.currentTarget.dataset.key//星星比较特别
     if (this.data.key == 0.5 && e.currentTarget.dataset.key == 0.5) {
       //只有一颗星的时候,再次点击,变为0
       key = 0;
     }
     console.log(key)
+
+    var that = this;
+    wx.request({
+      url: app.globalData.hosturl + 'clothe/setStar',
+      method: 'POST',
+      data: {
+        clotheid: that.data.cid,
+        clothestar: key,//这个错了
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log(res)
+        var resArray = res.data.toString().split(":");
+        if (resArray[0] == 'true') {
+          that.setData({
+            key: e.detail.value
+          })
+        }
+        else {
+          util.showModel('修改失败', resArray[1])
+        }
+      }
+    })
+
     this.setData({
       key: key
     })
@@ -149,6 +270,32 @@ Page({
   selectRight: function (e) {
     var key = e.currentTarget.dataset.key
     console.log(key)
+
+    var that = this;
+    wx.request({
+      url: app.globalData.hosturl + 'clothe/setStar',
+      method: 'POST',
+      data: {
+        clotheid: that.data.cid,
+        clothestar: key,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log(res)
+        var resArray = res.data.toString().split(":");
+        if (resArray[0] == 'true') {
+          that.setData({
+            key: e.detail.value
+          })
+        }
+        else {
+          util.showModel('修改失败', resArray[1])
+        }
+      }
+    })
+
     this.setData({
       key: key
     })
@@ -158,9 +305,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.setData({
-    //   curNav: options.cid,
-    // })
+    this.setData({
+      cid: options.cid,
+    })//onload的时候吧cid保存起来就可以读了
     var that = this;
     wx.request({
       url: app.globalData.hosturl + 'upload/clotheDetail',
@@ -178,7 +325,7 @@ Page({
           var data=res.data.data
           that.setData({
             imgUrl: data.clotheimg,
-            clothetype:data.clothetype,
+            typeindex:data.clothetype,
             clothedetail:data.clothedetail,
             locationindex:data.location,
             seasonindex:data.clotheseason,
@@ -192,10 +339,10 @@ Page({
         }
       }
     })
-    this.setData({
-      ageindex: app.globalData.age,
-      sexindex: app.globalData.sex
-    })
+    // this.setData({
+    //   ageindex: app.globalData.age,
+    //   sexindex: app.globalData.sex
+    // })
   },
 
   /**
