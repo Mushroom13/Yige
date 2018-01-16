@@ -5,27 +5,15 @@
     </view>
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd">描述</view>
-       
+
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text">
-          <!-- <view class="weui-media-box__title weui-media-box__title_in-text"> {{typearray[clothetype]}}</view> -->
           <picker bindchange="bindPickerChange_type" value="{{typeindex}}" range="{{typearray}}">
             <view class="picker">{{typearray[typeindex]}}</view>
           </picker>
           <view class="weui-media-box__desc">{{clothedetail}}</view>
         </view>
-      </view> 
-
-      <!-- <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-        <view class="weui-cell__bd weui-cell_primary">
-          <picker bindchange="bindPickerChange_color" value="{{typeindex}}" range="{{typearray}}">
-            <view class="picker">{{typearray[typeindex]}}</view>
-          </picker>
-          <view class="weui-media-box__desc">{{clothedetail}}</view>
-        </view>
-      </navigator> -->
-
-
+      </view>
       <view class="weui-panel__ft">
         <view class="weui-cell weui-cell_access weui-cell_link">
           <view class="weui-cell__bd" bindtap="showDialogBtn">修改</view>
@@ -55,7 +43,6 @@
                 <image src="../../images/color.png" style="width: 20px;height: 20px;margin-right: 5px" />
               </view>
               <view class="weui-cell__bd weui-cell_primary">
-                <!-- <view>蓝色</view> -->
                 <picker bindchange="bindPickerChange_color" value="{{colorindex}}" range="{{colorarray}}">
                   <view class="picker">
                     {{colorarray[colorindex]}}
@@ -70,7 +57,6 @@
                 <image src="../../images/season.png" style="width: 20px;height: 20px;margin-right: 5px" />
               </view>
               <view class="weui-cell__bd weui-cell_primary">
-                <!-- <view>冬季</view> -->
                 <picker bindchange="bindPickerChange_season" value="{{seasonindex}}" range="{{seasonarray}}">
                   <view class="picker">
                     {{seasonarray[seasonindex]}}
@@ -85,7 +71,6 @@
                 <image src="../../images/location.png" style="width: 20px;height: 20px;margin-right: 5px" />
               </view>
               <view class="weui-cell__bd weui-cell_primary">
-                <!-- <view>我的衣橱</view>             -->
                 <picker bindchange="bindPickerChange_location" value="{{locationindex}}" range="{{locationarray}}">
                   <view class="picker">
                     {{locationarray[locationindex]}}

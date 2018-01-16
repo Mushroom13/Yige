@@ -108,15 +108,16 @@ Page({
           name: 'file',
 
           success: function (res) {
-            util.showSuccess('上传图片成功')
+            util.showSuccess('图片加载完成')
             res = JSON.parse(res.data)
             that.setData({
-              imgUrl: res.data.imgUrl
+              imgUrl: res.data.imgUrl,
+              OriimgUrl:null
             })
           },
 
           fail: function (e) {
-            util.showModel('上传图片失败')
+            util.showModel('图片加载失败')
           }
         })
 
@@ -138,7 +139,8 @@ Page({
   data: {
     focus: false,
     inputValue: '',
-    imgUrl:''
+    imgUrl:null,
+    OriimgUrl: "../../images/2.jpg"
   },
   bindButtonTap: function () {
     var that = this;
@@ -153,8 +155,13 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
+        util.showSuccess('上传成功')
         var resArray = res.data.toString().split(":");
         if (resArray[0] == 'true') {
+          that.setData({
+            imgUrl: null,
+            OriimgUrl: "../../images/2.jpg"
+          })
           wx.navigateTo({
             url: '../clothe/clothe?cid=' + resArray[1]
           })
@@ -165,5 +172,12 @@ Page({
       }
     })
     
+  },
+  bindButtonTap_cancle: function (){
+    var that = this;
+    that.setData({
+      imgUrl: null,
+      OriimgUrl: "../../images/2.jpg"
+    })
   }
 })

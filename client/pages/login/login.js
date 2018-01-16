@@ -62,7 +62,7 @@ Page({
             that.setData({
               logged: true
             })
-            console.log(result)
+            //console.log(result)
             wx.switchTab({
               url: '../index/index'
             })
