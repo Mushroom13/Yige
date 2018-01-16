@@ -11,26 +11,17 @@ class Clothe extends CI_Controller {
         $this->load->model('ClotheModel');
     }
 
-//    public function index() {
-//        $result = LoginService::check();
-//
-//        if ($result['loginState'] === Constants::S_AUTH) {
-//            $userInfoResult=$result['userinfo'];
-//            $otherInfo=$this->UserModel->getInfo($userInfoResult['openId']);
-//
-//            $this->json([
-//                'code' => 0,
-//                'data' => $result['userinfo'],
-//                'age' => $otherInfo['age'],
-//                'sex' => $otherInfo['sex']
-//            ]);
-//        } else {
-//            $this->json([
-//                'code' => -1,
-//                'data' => []
-//            ]);
-//        }
-//    }
+    public function getAll()
+    {
+        $openid=$this->input->post('openid');
+        $all=$this->ClotheModel->getAll($openid);
+        $this->json([
+            'code' => 1,
+            'data' => $all,
+            'length' => count($all)
+        ]);
+
+    }
 
     public function setlocation()
     {

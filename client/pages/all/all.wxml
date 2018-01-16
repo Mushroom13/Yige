@@ -33,7 +33,7 @@
       <block wx:for="{{cateItems[curIndex].children}}">
         <view class="nav_right_items">
           <!--界面跳转 -->
-          <navigator url="../clothe/clothe">
+          <navigator url="../clothe/clothe?cid={{item.cid}}">
             <image src="{{item.image}}"></image>
             <text>{{item.name}}</text>
           </navigator>

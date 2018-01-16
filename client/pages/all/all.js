@@ -1,4 +1,6 @@
 // pages/index/all.js
+var util = require('../../utils/util.js')
+const app = getApp()
 Page({
 
   /**
@@ -10,53 +12,19 @@ Page({
         cate_id: 1,
         cate_name: "全部",
         ishaveChild: true,
-        children: [
-          {
-            child_id: 1,
-            name: '描述',
-            image: "../../images/1.jpg"
-          },
-          {
-            child_id: 2,
-            name: '描述',
-            image: "../../images/2.jpg"
-          },
-          {
-            child_id: 3,
-            name: '描述',
-            image: "../../images/3.jpg"
-          },
-          {
-            child_id: 4,
-            name: '描述',
-            image: "../../images/1.jpg"
-          },
-        ]
+        children: []
       },
       {
         cate_id: 2,
         cate_name: "上衣",
         ishaveChild: true,
-        children: [
-          {
-            child_id: 1,
-            name: '描述',
-            image: "../../images/3.jpg"
-          },
-          {
-            child_id: 2,
-            name: '描述',
-            image: "../../images/2.jpg"
-          },
-        ]
+        children: []
       },
       {
         cate_id: 3,
         cate_name: "裤子",
         ishaveChild: true,
-        children: [
-          {}, {},
-        ]
+        children: []
       },
       {
         cate_id: 4,
@@ -94,6 +62,63 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    wx.request({
+      url: app.globalData.hosturl + 'clothe/getAll',
+      method: 'POST',
+      data: {
+        openid: app.globalData.userInfo.openId
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.code == 1) {
+          var alldata = res.data.data
+          console.log(alldata)
+          var jsonArray=new Array();
+          var jsonCount = new Array();
+          for(var i=0;i<6;i++)
+          {
+            jsonArray[i] = new Array();
+            jsonCount[i] = 0;
+          }
+
+          for(var i in alldata)
+          {
+            var item=alldata[i]
+            jsonCount[0]++;//全部项的总数加一
+            var alljson = {
+              child_id: jsonCount[0],
+              name: item.clothedetail,
+              image: item.clotheimg,
+              cid: item.clotheid
+            }//新建全部项
+            
+            that.data.cateItems[0].children.push(alljson)//将全部项增加到全部数组中
+            var itemtype = parseInt(item.clothetype)+1;
+            jsonCount[itemtype]++;//对应项的总数加一
+            var ajson = {
+              child_id: jsonCount[itemtype],
+              name: item.clothedetail,
+              image: item.clotheimg,
+              cid: item.clotheid
+            }//新建某一项
+            
+            that.data.cateItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
+            
+          }
+          console.log(that.data.cateItems)
+          that.setData({
+            cateItems: that.data.cateItems
+          })
+        }
+        else {
+          util.showModel('加载失败', res.data.error)
+        }
+      }
+    })
     this.setData({
       curNav: options.nowid,
       curIndex: options.nowid-1
