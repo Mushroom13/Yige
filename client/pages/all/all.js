@@ -7,6 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+
+    clientHeight: 0,  
+    // tab切换  
+    currentTab: 0,  
+
     cateItems: [
       {
         cate_id: 1,
@@ -114,6 +119,13 @@ Page({
           that.setData({
             cateItems: that.data.cateItems
           })
+          wx.getSystemInfo({
+            success: function (res) {
+              that.setData({
+                clientHeight: res.windowHeight
+              });
+            }
+          });
         }
         else {
           util.showModel('加载失败', res.data.error)
@@ -124,8 +136,27 @@ Page({
       curNav: options.nowid,
       curIndex: options.nowid-1
     })
-  }    ,
 
+    
+  },
+  bindChange: function (e) {
+
+    var that = this;
+    that.setData({ currentTab: e.detail.current });
+
+  },  
+  swichNav: function (e) {
+
+    var that = this;
+
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current
+      })
+    }
+  } ,
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -178,6 +209,7 @@ Page({
           var jsonCount = new Array();
           for (var i = 0; i < 6; i++) {
             that.data.cateItems[i].children = new Array();
+            that.data.cateItems[i].ishaveChild = false;
             jsonArray[i] = new Array();
             jsonCount[i] = 0;
           }
@@ -210,6 +242,13 @@ Page({
           that.setData({
             cateItems: that.data.cateItems
           })
+          wx.getSystemInfo({
+            success: function (res) {
+              that.setData({
+                clientHeight: res.windowHeight
+              });
+            }
+          });
         }
         else {
           util.showModel('加载失败', res.data.error)

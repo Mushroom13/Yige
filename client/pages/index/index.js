@@ -38,7 +38,7 @@ Page({
   },
    onTouchLike: function (event) {
     wx.navigateTo({
-      url: '../like/like',
+      url: '../all/all?nowid=' + event.currentTarget.id ,
     })
   }
 })

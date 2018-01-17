@@ -1,5 +1,6 @@
 /* pages/index/all.wxss */
 @import "/wxSearch/wxSearch.wxss";
+
 .list-item {
   height: 150px;
   width: 45%;
@@ -38,7 +39,7 @@
 
 page {
   background: #f5f5f5;
-} 
+}
 
 /*总体主盒子*/
 
@@ -51,6 +52,7 @@ page {
 }
 
 /*左侧栏主盒子*/
+
 .nav_top {
   /*设置行内块级元素（没使用定位）*/
   display: inline-block;
@@ -64,10 +66,11 @@ page {
   /*设置行内块级元素（没使用定位）*/
   display: inline-block;
   width: 25%;
-  height: 80%;
+   height: 100%; 
   /*主盒子设置背景色为灰色*/
-  /* background: #f5f5f5; */
+  background: #f5f5f5;
   text-align: center;
+  /* margin-top: 60px; */
 }
 
 /*左侧栏list的item*/
@@ -98,12 +101,12 @@ page {
 .nav_right {
   /*右侧盒子使用了绝对定位*/
   position: absolute;
-  top: 15%;
+  top: 1%;
   right: 0;
   flex: 1;
   /*宽度75%，高度占满，并使用百分比布局*/
   width: 75%;
-  height: 800px;
+  height: 100%; 
   padding: 10px;
   box-sizing: border-box;
   background: #fff;
@@ -117,7 +120,7 @@ page {
   width: 46%;
   height: 120px;
   text-align: center;
-   margin: 2%; 
+  margin: 2%;
 }
 
 .nav_right .nav_right_items image {
@@ -142,5 +145,35 @@ page {
 .nodata_text {
   color: black;
   font-size: 14px;
+  text-align: center;
+}
+
+.swiper-tab {
+  width: 100%;
+  border-bottom: 2rpx solid #ddd;
+  text-align: center;
+  line-height: 60rpx;
+}
+
+.swiper-tab-list {
+  font-size: 14px;
+  display: inline-block;
+  width: 50%;
+  color: #ddd;
+}
+
+.on {
+  color: #cd3b3b;
+  border-bottom: 5rpx solid #cd3b3b;
+}
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.swiper-box view {
   text-align: center;
 }
