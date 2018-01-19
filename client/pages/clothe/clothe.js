@@ -19,7 +19,7 @@ Page({
     imgUrl:'',
     // clothetype:'',
     clothedetail:'',
-
+    detailtemp:'',
     locationarray: ['我的衣橱', '我的收藏',],
     objectLocationArray: [
       {
@@ -424,7 +424,44 @@ Page({
   /**
    * 对话框确认按钮点击事件
    */
+  detailChange:function(e){
+    this.setData({
+      detailtemp: e.detail.value
+    })
+  },
+
   onConfirm: function () {
+    //修改描述的功能添加在这里
+    var detailtemp = this.data.detailtemp
+    console.log(detailtemp)
+    if (detailtemp!='')
+    {
+      var that = this;
+      wx.request({
+        url: app.globalData.hosturl + 'clothe/setDetail',
+        method: 'POST',
+        data: {
+          clotheid: that.data.cid,
+          clothedetail: detailtemp,
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          console.log(res)
+          var resArray = res.data.toString().split(":");
+          if (resArray[0] == 'true') {
+            that.setData({
+              clothedetail: detailtemp,
+              detailtemp: ''
+            })
+          }
+          else {
+            util.showModel('修改失败', resArray[1])
+          }
+        }
+      })
+    }
     this.hideModal();
   }
 })

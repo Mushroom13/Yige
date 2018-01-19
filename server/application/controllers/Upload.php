@@ -43,7 +43,7 @@ class Upload extends CI_Controller {
         ini_set('post_max_size', '10M');
 
         // 限制文件格式，支持图片上传
-        if ($file['type'] !== 'image/jpeg' && $file['type'] !== 'image/png') {
+        if ($file['type'] !== 'image/jpeg' && $file['type'] !== 'image/jpg' && $file['type'] !== 'image/png') {
             $this->json([
                 'code' => 1,
                 'data' => '不支持的上传图片类型：' . $file['type']

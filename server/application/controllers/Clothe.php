@@ -11,6 +11,17 @@ class Clothe extends CI_Controller {
         $this->load->model('ClotheModel');
     }
 
+    public function getMyLike()
+    {
+        $openid=$this->input->post('openid');
+        $all=$this->ClotheModel->getMyLike($openid);
+        $this->json([
+            'code' => 1,
+            'data' => $all,
+            'length' => count($all)
+        ]);
+    }
+
     public function getAll()
     {
         $openid=$this->input->post('openid');
@@ -41,6 +52,19 @@ class Clothe extends CI_Controller {
         $clotheid=$this->input->post('clotheid');
         $type=$this->input->post('clothetype');
         if($this->ClotheModel->settype($clotheid,$type))
+        {
+            echo 'true:1';
+        }
+        else
+        {
+            echo 'false:更新失败';
+        }
+    }
+    public function setDetail()
+    {
+        $clotheid=$this->input->post('clotheid');
+        $detail=$this->input->post('clothedetail');
+        if($this->ClotheModel->setdetail($clotheid,$detail))
         {
             echo 'true:1';
         }

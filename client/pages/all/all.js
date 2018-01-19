@@ -51,7 +51,45 @@ Page({
       }
     ],
     curNav: 1,
-    curIndex:0
+    curIndex:0,
+    likeItems: [
+      {
+        cate_id: 1,
+        cate_name: "全部",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 2,
+        cate_name: "上衣",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 3,
+        cate_name: "裤子",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 4,
+        cate_name: "外套",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 5,
+        cate_name: "鞋子",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 6,
+        cate_name: "其他",
+        ishaveChild: false,
+        children: []
+      }
+    ]
   },
   switchRightTab: function (e) {
     // 获取item项的id，和数组的下标值  
@@ -67,6 +105,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      currentTab: options.currentTab,
+      curNav: options.nowid,
+      curIndex: options.nowid - 1,
+    })
     var that = this;
     wx.request({
       url: app.globalData.hosturl + 'clothe/getAll',
@@ -81,43 +124,79 @@ Page({
         console.log(res.data)
         if (res.data.code == 1) {
           var alldata = res.data.data
-          console.log(alldata)
           var jsonArray=new Array();
           var jsonCount = new Array();
+          var likeArray=new Array();
+          var likeCount=new Array();
           for(var i=0;i<6;i++)
           {
+            that.data.cateItems[i].children = new Array();
+            that.data.cateItems[i].ishaveChild = false;
+            that.data.likeItems[i].children = new Array();
+            that.data.likeItems[i].ishaveChild = false;
             jsonArray[i] = new Array();
             jsonCount[i] = 0;
+            likeArray[i] = new Array();
+            likeCount[i] = 0;
           }
 
           for(var i in alldata)
           {
-            var item=alldata[i]
-            jsonCount[0]++;//全部项的总数加一
-            var alljson = {
-              child_id: jsonCount[0],
-              name: item.clothedetail,
-              image: item.clotheimg,
-              cid: item.clotheid
-            }//新建全部项
+            var item = alldata[i]
+            if (item.location==0)
+            {
+             
+              jsonCount[0]++;//全部项的总数加一
+              var alljson = {
+                child_id: jsonCount[0],
+                name: item.clothedetail,
+                image: item.clotheimg,
+                cid: item.clotheid
+              }//新建全部项
+
+              that.data.cateItems[0].children.push(alljson)//将全部项增加到全部数组中
+              that.data.cateItems[0].ishaveChild = true;
+              var itemtype = parseInt(item.clothetype) + 1;
+              jsonCount[itemtype]++;//对应项的总数加一
+              var ajson = {
+                child_id: jsonCount[itemtype],
+                name: item.clothedetail,
+                image: item.clotheimg,
+                cid: item.clotheid
+              }//新建某一项
+
+              that.data.cateItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
+              that.data.cateItems[itemtype].ishaveChild = true;
+            }
+            else
+            {
+              likeCount[0]++;//全部项的总数加一
+              var alljson = {
+                child_id: jsonCount[0],
+                name: item.clothedetail,
+                image: item.clotheimg,
+                cid: item.clotheid
+              }//新建全部项
+
+              that.data.likeItems[0].children.push(alljson)//将全部项增加到全部数组中
+              that.data.likeItems[0].ishaveChild = true;
+              var itemtype = parseInt(item.clothetype) + 1;
+              likeCount[itemtype]++;//对应项的总数加一
+              var ajson = {
+                child_id: likeCount[itemtype],
+                name: item.clothedetail,
+                image: item.clotheimg,
+                cid: item.clotheid
+              }//新建某一项
+
+              that.data.likeItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
+              that.data.likeItems[itemtype].ishaveChild = true;
+            }
             
-            that.data.cateItems[0].children.push(alljson)//将全部项增加到全部数组中
-            that.data.cateItems[0].ishaveChild=true;
-            var itemtype = parseInt(item.clothetype)+1;
-            jsonCount[itemtype]++;//对应项的总数加一
-            var ajson = {
-              child_id: jsonCount[itemtype],
-              name: item.clothedetail,
-              image: item.clotheimg,
-              cid: item.clotheid
-            }//新建某一项
-            
-            that.data.cateItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
-            that.data.cateItems[itemtype].ishaveChild = true;
           }
-          console.log(that.data.cateItems)
           that.setData({
-            cateItems: that.data.cateItems
+            cateItems: that.data.cateItems,
+            likeItems: that.data.likeItems
           })
           wx.getSystemInfo({
             success: function (res) {
@@ -132,12 +211,6 @@ Page({
         }
       }
     })
-    this.setData({
-      curNav: options.nowid,
-      curIndex: options.nowid-1
-    })
-
-    
   },
   bindChange: function (e) {
 
@@ -207,40 +280,74 @@ Page({
           console.log(alldata)
           var jsonArray = new Array();
           var jsonCount = new Array();
+          var likeArray = new Array();
+          var likeCount = new Array();
           for (var i = 0; i < 6; i++) {
             that.data.cateItems[i].children = new Array();
             that.data.cateItems[i].ishaveChild = false;
+            that.data.likeItems[i].children = new Array();
+            that.data.likeItems[i].ishaveChild = false;
             jsonArray[i] = new Array();
             jsonCount[i] = 0;
+            likeArray[i] = new Array();
+            likeCount[i] = 0;
           }
 
           for (var i in alldata) {
             var item = alldata[i]
-            jsonCount[0]++;//全部项的总数加一
-            var alljson = {
-              child_id: jsonCount[0],
-              name: item.clothedetail,
-              image: item.clotheimg,
-              cid: item.clotheid
-            }//新建全部项
+            if (item.location == 0) {
+              
+              jsonCount[0]++;//全部项的总数加一
+              var alljson = {
+                child_id: jsonCount[0],
+                name: item.clothedetail,
+                image: item.clotheimg,
+                cid: item.clotheid
+              }//新建全部项
 
-            that.data.cateItems[0].children.push(alljson)//将全部项增加到全部数组中
-            that.data.cateItems[0].ishaveChild = true;
-            var itemtype = parseInt(item.clothetype) + 1;
-            jsonCount[itemtype]++;//对应项的总数加一
-            var ajson = {
-              child_id: jsonCount[itemtype],
-              name: item.clothedetail,
-              image: item.clotheimg,
-              cid: item.clotheid
-            }//新建某一项
+              that.data.cateItems[0].children.push(alljson)//将全部项增加到全部数组中
+              that.data.cateItems[0].ishaveChild = true;
+              var itemtype = parseInt(item.clothetype) + 1;
+              jsonCount[itemtype]++;//对应项的总数加一
+              var ajson = {
+                child_id: jsonCount[itemtype],
+                name: item.clothedetail,
+                image: item.clotheimg,
+                cid: item.clotheid
+              }//新建某一项
 
-            that.data.cateItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
-            that.data.cateItems[itemtype].ishaveChild = true;
+              that.data.cateItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
+              that.data.cateItems[itemtype].ishaveChild = true;
+            }
+            else {
+              
+              likeCount[0]++;//全部项的总数加一
+              var alljson = {
+                child_id: jsonCount[0],
+                name: item.clothedetail,
+                image: item.clotheimg,
+                cid: item.clotheid
+              }//新建全部项
+
+              that.data.likeItems[0].children.push(alljson)//将全部项增加到全部数组中
+              that.data.likeItems[0].ishaveChild = true;
+              var itemtype = parseInt(item.clothetype) + 1;
+              likeCount[itemtype]++;//对应项的总数加一
+              var ajson = {
+                child_id: likeCount[itemtype],
+                name: item.clothedetail,
+                image: item.clotheimg,
+                cid: item.clotheid
+              }//新建某一项
+
+              that.data.likeItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
+              that.data.likeItems[itemtype].ishaveChild = true;
+            }
+
           }
-          console.log(that.data.cateItems)
           that.setData({
-            cateItems: that.data.cateItems
+            cateItems: that.data.cateItems,
+            likeItems: that.data.likeItems
           })
           wx.getSystemInfo({
             success: function (res) {

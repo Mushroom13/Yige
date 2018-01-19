@@ -65,10 +65,21 @@ class ClotheModel extends CI_Model
         );
         return $this->db->update('clothe',$data,array('clotheid'=>$clotheid));
     }
+    public function setdetail($clotheid,$detail){
+        $data = array(
+            'clothedetail' => $detail,
+        );
+        return $this->db->update('clothe',$data,array('clotheid'=>$clotheid));
+    }
 
     public function getAll($openid)
     {
         $query=$this->db->query("SELECT clothe.* FROM clothe , clothespress WHERE openid='".$openid."' AND clothe.clotheid=clothespress.clotheid");
+        return $query->result_array();
+    }
+    public function getMyLike($openid)
+    {
+        $query=$this->db->query("SELECT clothe.clotheid as cid,clothe.clotheimg as img FROM clothe , clothespress WHERE openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=1 ORDER BY clothe.clothestar DESC LIMIT 0,5");
         return $query->result_array();
     }
 }

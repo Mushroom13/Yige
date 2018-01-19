@@ -100,7 +100,7 @@ Page({
       success: function (res) {
         util.showBusy('正在上传')
         var filePath = res.tempFilePaths[0]
-
+        //console.log(filePath)
         // 上传图片
         wx.uploadFile({
           url: config.service.uploadUrl,
@@ -108,12 +108,20 @@ Page({
           name: 'file',
 
           success: function (res) {
-            util.showSuccess('图片加载完成')
             res = JSON.parse(res.data)
-            that.setData({
-              imgUrl: res.data.imgUrl,
-              OriimgUrl:null
-            })
+            console.log(res)
+            if (res.code==1)
+            {
+              util.showModel('上传失败', res.data)
+            }
+            else
+            {
+              util.showSuccess('图片加载完成')
+              that.setData({
+                imgUrl: res.data.imgUrl,
+                OriimgUrl: null
+              })
+            }
           },
 
           fail: function (e) {

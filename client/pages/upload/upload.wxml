@@ -5,15 +5,19 @@
 
 
   <view class="content">
-    <view class="content-item" bindtap="doUpload">
-      <!-- <image src="../../images/2.jpg" /> -->
-      <image src="{{OriimgUrl}}" />
-    </view>
+  
+    
+      <view class="content-item" bindtap="doUpload">
+        <!-- <image src="../../images/2.jpg" /> -->
+        <image src="{{OriimgUrl}}" />
+      </view>
+
     <!-- <view class="uploader"> -->
     <!-- <view class="uploader-text" bindtap="doUpload">
          <text>上传图片</text> 
       </view> -->
     <view wx:if="{{imgUrl}}">
+    
       <image class="newimg" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
       <view class="buttoncontent">
         <view class="btn-area">
