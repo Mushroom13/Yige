@@ -22,7 +22,7 @@
           <view class="modal-dialog" wx:if="{{showModal}}">
             <view class="top grid">
               <label class="title col-0">描述</label>
-              <input class="input_base input_h30 col-1" name="detail" bindblur="detailChange" value="{{detailtemp}}"></input>
+              <input class="input_base input_h30 col-1" name="detail" bindinput="detailChange" value="{{detailtemp}}"></input>
             </view>
             <view class="modal-footer">
               <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
