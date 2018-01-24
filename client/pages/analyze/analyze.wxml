@@ -1,0 +1,42 @@
+<!--pages/analyze/analyze.wxml-->
+
+
+<view class="content">
+  <view class="selection">
+    <view>
+      <text class="mytext" >类型统计</text>
+    </view>
+  </view>
+  <view class="content-item">
+    <view class="container">
+      <canvas canvas-id="pieCanvas_type" class="canvas" style="height:280px" bindtouchstart="touchHandler"></canvas>
+    </view>
+  </view>
+</view>
+
+<view class="content">
+  <view class="selection">
+    <view>
+      <text class="mytext">季节统计</text>
+    </view>
+  </view>
+  <view class="content-item">
+    <view class="container">
+      <canvas canvas-id="pieCanvas_season" class="canvas" style="height:280px" bindtouchstart="touchHandler"></canvas>
+    </view>
+  </view>
+</view>
+
+<view class="content">
+  <view class="selection">
+    <view>
+      <text class="mytext">颜色统计</text>
+    </view>
+  </view>
+
+  <view class="content-item">
+    <view class="container">
+      <canvas canvas-id="pieCanvas_color" class="canvas" style="height:280px" bindtouchstart="touchHandler"></canvas>
+    </view>
+  </view>
+</view>

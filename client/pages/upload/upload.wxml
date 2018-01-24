@@ -1,23 +1,12 @@
 <view class="selection">
   <view class="header">
-    <text class="text-header">图片上传</text>
+      <text class="text-header">图片上传</text>
   </view>
-
-
   <view class="content">
-  
-    
-      <view class="content-item" bindtap="doUpload">
-        <!-- <image src="../../images/2.jpg" /> -->
-        <image src="{{OriimgUrl}}" />
-      </view>
-
-    <!-- <view class="uploader"> -->
-    <!-- <view class="uploader-text" bindtap="doUpload">
-         <text>上传图片</text> 
-      </view> -->
+    <view class="content-item" bindtap="doUpload">
+      <image src="{{OriimgUrl}}" />
+    </view>
     <view wx:if="{{imgUrl}}">
-    
       <image class="newimg" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
       <view class="buttoncontent">
         <view class="btn-area">
@@ -28,8 +17,6 @@
         </view>
       </view>
     </view>
-    <!-- </view> -->
-
   </view>
 </view>
 
@@ -41,14 +28,14 @@
     <view class="content-item2">
       <view class="section">
         <input placeholder="" focus="{{focus}}" class="input-area" />
-       <view class="buttoncontent">
-        <view class="btn-area">
-          <button class="buttontext" bindtap="bindButtonTap">上传</button>
+        <view class="buttoncontent">
+          <view class="btn-area">
+            <button class="buttontext" bindtap="bindButtonTap">上传</button>
+          </view>
+          <view class="btn-area">
+            <button class="buttontext" bindtap="bindButtonTap">取消</button>
+          </view>
         </view>
-        <view class="btn-area">
-          <button class="buttontext" bindtap="bindButtonTap">取消</button>
-        </view>
-      </view>
       </view>
     </view>
   </view>

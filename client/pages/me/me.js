@@ -20,7 +20,7 @@ Page({
   },
   onTouchLike: function (event) {
     wx.navigateTo({
-      url: '../like/like',
+      url: '../analyze/analyze',
     })
   },
  onTouchPersonal: function (event) {

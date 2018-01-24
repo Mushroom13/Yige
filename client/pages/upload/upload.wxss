@@ -38,7 +38,8 @@
 }
 
 .selection {
-  border-bottom: 5px solid #ddd;
+ padding-bottom: 20px;
+  border-bottom: 3px solid #ddd;
 }
 
 .buttoncontent {
@@ -67,16 +68,10 @@
 }
 
 .header {
-  border-left-width: 2px;
-  border-left-style: solid;
-  border-left-color: #cd3b3b;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 2%;
-  margin-bottom: 5px;
-  margin-top: 10px;
-  border-bottom: 1px solid #ddd;
+ border-bottom: 1px solid #ddd;
+  height: 30px;
+  margin-top: 15px;
+  margin: 20px;
 }
 
 .head {
@@ -84,8 +79,14 @@
 }
 
 .text-header {
-  font-size: 18px;
-  color: grey;
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+  color: gray;
+  font-size: 16px;
+  border-left-width: 2px;
+  border-left-style: solid;
+  border-left-color: #cd3b3b;
 }
 
 .uploader, .tunnel {

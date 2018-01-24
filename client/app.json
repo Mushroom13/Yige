@@ -1,6 +1,5 @@
 {
   "pages": [
-   
     "pages/login/login",
     "pages/index/index",
     "pages/all/all",
@@ -10,7 +9,8 @@
     "pages/upload/upload",
     "pages/personal/personal",
     "pages/clothe/clothe",
-    "pages/statistics/statistics"
+    "pages/statistics/statistics",
+    "pages/analyze/analyze"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,31 @@
+/* pages/analyze/analyze.wxss */
+
+.selection {
+ border-bottom: 1px solid #ddd;
+  height: 30px;
+  margin-top: 15px;
+  margin: 20px;
+}
+
+.mytext {
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+  color: gray;
+  font-size: 16px;
+  border-left-width: 2px;
+  border-left-style: solid;
+  border-left-color: #cd3b3b;
+}
+
+.content {
+  padding-bottom: 20px;
+  border-bottom: 3px solid #ddd;
+}
+
+.content-item {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  /* margin-left: -15px; */
+}
