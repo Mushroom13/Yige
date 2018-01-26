@@ -14,21 +14,15 @@
           <view class="weui-media-box__desc">{{clothedetail}}</view>
         </view>
       </view>
+
       <view class="weui-panel__ft">
         <view class="weui-cell weui-cell_access weui-cell_link">
-          <view class="weui-cell__bd" bindtap="showDialogBtn">修改描述</view>
-
-          <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
-          <view class="modal-dialog" wx:if="{{showModal}}">
-            <view class="top grid">
-              <label class="title col-0">描述</label>
-              <input class="input_base input_h30 col-1" name="detail" bindinput="detailChange" value="{{detailtemp}}"></input>
-            </view>
-            <view class="modal-footer">
-              <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
-              <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
-            </view>
+          <view class="container" class="zn-uploadimg">
+            <view class="weui-cell__bd" bindtap="modalinput">修改描述</view>
           </view>
+          <modal hidden="{{hiddenmodalput}}" title="修改描述" confirm-text="提交" cancel-text="取消" bindcancel="onCancel" bindconfirm="onConfirm">
+            <input name="detail" bindinput="detailChange" value="{{detailtemp}}"/>
+          </modal>
         </view>
       </view>
     </view>
@@ -99,7 +93,7 @@
     </view>
     <view class="button-sp-area">
       <button class="weui-btn" type="primary">推荐搭配</button>
-      <button class="weui-btn" type="warn">删除</button>
+      <button class="weui-btn" type="warn" bindtap="modalcnt">删除</button>
     </view>
 
   </view>

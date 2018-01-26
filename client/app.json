@@ -3,7 +3,6 @@
     "pages/login/login",
     "pages/index/index",
     "pages/all/all",
-    "pages/detail/detail",
     "pages/me/me",
     "pages/like/like",
     "pages/upload/upload",

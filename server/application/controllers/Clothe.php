@@ -112,5 +112,16 @@ class Clothe extends CI_Controller {
             echo 'false:更新失败';
         }
     }
-
+    public function delete(){
+        $openid=$this->input->post('openid');
+        $clotheid=$this->input->post('clotheid');
+        if($this->ClotheModel->delete($openid,$clotheid))
+        {
+            echo 'true:1';
+        }
+        else
+        {
+            echo 'false:删除失败';
+        }
+    }
 }

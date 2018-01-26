@@ -11,13 +11,13 @@ Page({
   data: {
     cid:0,//就是这个
     showModal: false,
+    hiddenmodalput: true,  
     stars: [0, 1, 2, 3, 4],
     normalSrc: '../../images/normal.png',
     selectedSrc: '../../images/selected.png',
     halfSrc: '../../images/half.png',
     key: 0,//评分
     imgUrl:'',
-    // clothetype:'',
     clothedetail:'',
     detailtemp:'',
     locationarray: ['我的衣橱', '我的收藏',],
@@ -339,99 +339,29 @@ Page({
         }
       }
     })
-    // this.setData({
-    //   ageindex: app.globalData.age,
-    //   sexindex: app.globalData.sex
-    // })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
-  /**
-     * 弹窗
-     */
-  showDialogBtn: function () {
+  //点击按钮痰喘指定的hiddenmodalput弹出框  
+  modalinput: function () {
     this.setData({
-      showModal: true
+      hiddenmodalput: !this.data.hiddenmodalput
     })
   },
-  /**
-   * 弹出框蒙层截断touchmove事件
-   */
-  preventTouchMove: function () {
-  },
-  /**
-   * 隐藏模态对话框
-   */
-  hideModal: function () {
+  //取消按钮  
+  onCancel: function () {
     this.setData({
-      showModal: false
+      hiddenmodalput: true
     });
   },
-  /**
-   * 对话框取消按钮点击事件
-   */
-  onCancel: function () {
-    this.hideModal();
-  },
-  /**
-   * 对话框确认按钮点击事件
-   */
-  detailChange:function(e){
+  //确认  
+  detailChange: function (e) {
     this.setData({
       detailtemp: e.detail.value
     })
   },
 
+
   onConfirm: function () {
-    //修改描述的功能添加在这里
     var detailtemp = this.data.detailtemp
     console.log(detailtemp)
     if (detailtemp!='')
@@ -462,6 +392,48 @@ Page({
         }
       })
     }
-    this.hideModal();
-  }
+    this.setData({
+      hiddenmodalput: true
+    });
+  },
+
+  modalcnt: function () {
+    var that = this;
+    wx.showModal({
+      title: '',
+      content: '确定要删除吗？',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          
+          wx.request({
+            url: app.globalData.hosturl + 'clothe/delete',
+            method: 'POST',
+            data: {
+              clotheid: that.data.cid,
+              openid: app.globalData.userInfo.openId
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: function (res) {
+              console.log(res)
+              var resArray = res.data.toString().split(":");
+              if (resArray[0] == 'true') {
+                wx.switchTab({
+                  url: '../index/index',
+                })
+              }
+              else {
+                util.showModel('删除失败', resArray[1])
+              }
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+    
+  }  
 })

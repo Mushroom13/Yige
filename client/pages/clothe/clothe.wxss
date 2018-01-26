@@ -1,36 +1,5 @@
 /* pages/clothe/clothe.wxss */
 
-.page__hd {
-    padding: 40px;
-}
-.page__bd {
-    padding-bottom: 40px;
-}
-.page__bd_spacing {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-.page__ft{
-    padding-bottom: 10px;
-    text-align: center;
-}
-
-.page__title {
-    text-align: left;
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.page__desc {
-    margin-top: 5px;
-    color: #888888;
-    text-align: left;
-    font-size: 14px;
-}
-page{
-    background-color: #FFFFFF;
-}
 image{
     margin: 4px 0;
 }
@@ -38,14 +7,6 @@ image{
   display: flex;
   justify-content: center;
   margin-top: 30px;
-}
-.button-sp-area{
-    margin: 0 auto;
-    padding-top: 15px;
-    width: 90%;
-}
-.mini-btn{
-    margin-right: 5px;
 }
 
 .like {
@@ -80,104 +41,4 @@ image{
   top: 50rpx;
   width: 50rpx;
   height: 80rpx;
-}
-
-.show-btn {
-  margin-top: 100rpx;
-   color: black; 
-   background-color: white; 
-  font-size: 16px;
-}
-.modal-mask {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: #000;
-  opacity: 0.3;
-  overflow: hidden;
-  z-index: 9000;
-  color: #fff;
-}
-
-.modal-dialog {
-  width: 540rpx;
-  overflow: hidden;
-  position: fixed;
-  top: 50%;
-  left: 0;
-  z-index: 9999;
-  background: #f9f9f9;
-  margin: -180rpx 105rpx;
-  border-radius: 36rpx;
-}
-
-.modal-title {
-  padding-top: 50rpx;
-  font-size: 36rpx;
-  color: #030303;
-  text-align: center;
-}
-
-.modal-footer {
-  display: flex;
-  flex-direction: row;
-  height: 86rpx;
-  border-top: 1px solid #dedede;
-  font-size: 30rpx;
-  line-height: 86rpx;
-  margin-top: 15px;
-}
-
-.btn-cancel {
-  width: 50%;
-  color: #666;
-  text-align: center;
-  border-right: 1px solid #dedede;
-}
-
-.btn-confirm {
-  width: 50%;
-  color: #ec5300;
-  text-align: center;
-}
-
-.grid {
-  display: -webkit-box;
-  display: box;
-}
-
-.col-0 {
-  -webkit-box-flex: 0;
-  /* box-flex: 0; */
-}
-
-.col-1 {
-  -webkit-box-flex: 1;
-  /* box-flex: 1; */
-}
-
-.input_base {
-  border: 2rpx solid #ccc;
-  padding-left: 10rpx;
-  margin-right: 50rpx;
-}
-
-.input_h30 {
-  height: 30px;
-  line-height: 30px;
-}
-
-.top {
-  padding-top: 15px;
-}
-
-.title {
-  height: 30px;
-  line-height: 30px;
-  width: 160rpx;
-  text-align: center;
-  display: inline-block;
-  font: 300 28rpx/30px "microsoft yahei";
 }
