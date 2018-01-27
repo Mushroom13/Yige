@@ -1,5 +1,4 @@
 /* pages/index/all.wxss */
-@import "/wxSearch/wxSearch.wxss";
 
 .list-item {
   height: 150px;

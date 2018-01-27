@@ -9,7 +9,8 @@
     "pages/personal/personal",
     "pages/clothe/clothe",
     "pages/statistics/statistics",
-    "pages/analyze/analyze"
+    "pages/analyze/analyze",
+    "pages/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",

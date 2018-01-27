@@ -8,10 +8,9 @@ Page({
    */
   data: {
 
-    clientHeight: 0,  
+    clientHeight: 0,
     // tab切换  
-    currentTab: 0,  
-
+    currentTab: 0,
     cateItems: [
       {
         cate_id: 1,
@@ -51,7 +50,7 @@ Page({
       }
     ],
     curNav: 1,
-    curIndex:0,
+    curIndex: 0,
     likeItems: [
       {
         cate_id: 1,
@@ -91,6 +90,13 @@ Page({
       }
     ]
   },
+  // 搜索入口  
+  wxSearchTab: function () {
+    var that=this
+    wx.navigateTo({
+      url: '../search/search?currentTab=' + that.data.currentTab
+    })
+  },
   switchRightTab: function (e) {
     // 获取item项的id，和数组的下标值  
     let id = e.target.dataset.id,
@@ -111,6 +117,7 @@ Page({
       curIndex: options.nowid - 1,
     })
     var that = this;
+    
     wx.request({
       url: app.globalData.hosturl + 'clothe/getAll',
       method: 'POST',
@@ -124,12 +131,11 @@ Page({
         console.log(res.data)
         if (res.data.code == 1) {
           var alldata = res.data.data
-          var jsonArray=new Array();
+          var jsonArray = new Array();
           var jsonCount = new Array();
-          var likeArray=new Array();
-          var likeCount=new Array();
-          for(var i=0;i<6;i++)
-          {
+          var likeArray = new Array();
+          var likeCount = new Array();
+          for (var i = 0; i < 6; i++) {
             that.data.cateItems[i].children = new Array();
             that.data.cateItems[i].ishaveChild = false;
             that.data.likeItems[i].children = new Array();
@@ -140,12 +146,10 @@ Page({
             likeCount[i] = 0;
           }
 
-          for(var i in alldata)
-          {
+          for (var i in alldata) {
             var item = alldata[i]
-            if (item.location==0)
-            {
-             
+            if (item.location == 0) {
+
               jsonCount[0]++;//全部项的总数加一
               var alljson = {
                 child_id: jsonCount[0],
@@ -168,8 +172,7 @@ Page({
               that.data.cateItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
               that.data.cateItems[itemtype].ishaveChild = true;
             }
-            else
-            {
+            else {
               likeCount[0]++;//全部项的总数加一
               var alljson = {
                 child_id: jsonCount[0],
@@ -192,7 +195,7 @@ Page({
               that.data.likeItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
               that.data.likeItems[itemtype].ishaveChild = true;
             }
-            
+
           }
           that.setData({
             cateItems: that.data.cateItems,
@@ -217,7 +220,7 @@ Page({
     var that = this;
     that.setData({ currentTab: e.detail.current });
 
-  },  
+  },
   swichNav: function (e) {
 
     var that = this;
@@ -229,7 +232,7 @@ Page({
         currentTab: e.target.dataset.current
       })
     }
-  } ,
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -296,7 +299,7 @@ Page({
           for (var i in alldata) {
             var item = alldata[i]
             if (item.location == 0) {
-              
+
               jsonCount[0]++;//全部项的总数加一
               var alljson = {
                 child_id: jsonCount[0],
@@ -320,7 +323,7 @@ Page({
               that.data.cateItems[itemtype].ishaveChild = true;
             }
             else {
-              
+
               likeCount[0]++;//全部项的总数加一
               var alljson = {
                 child_id: jsonCount[0],
@@ -364,7 +367,7 @@ Page({
         wx.stopPullDownRefresh() //停止下拉刷新
       }
     })
-    
+
   },
 
   /**
@@ -384,5 +387,6 @@ Page({
     wx.navigateTo({
       url: '../detail/detail',
     })
-  }
+  },
+  
 })
