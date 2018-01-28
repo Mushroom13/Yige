@@ -153,7 +153,7 @@ Page({
   bindButtonTap: function () {
     var that = this;
     wx.request({
-      url: app.globalData.hosturl + 'upload/addClothe',
+      url: app.globalData.hosturl + 'clothe/addClothe',
       method: 'POST',
       data: {
         openid: app.globalData.userInfo.openId,

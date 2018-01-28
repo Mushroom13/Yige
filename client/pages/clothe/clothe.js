@@ -310,7 +310,7 @@ Page({
     })//onload的时候吧cid保存起来就可以读了
     var that = this;
     wx.request({
-      url: app.globalData.hosturl + 'upload/clotheDetail',
+      url: app.globalData.hosturl + 'clothe/clotheDetail',
       method: 'POST',
       data: {
         clotheid: options.cid

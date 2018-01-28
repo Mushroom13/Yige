@@ -12,28 +12,7 @@ class Upload extends CI_Controller {
         $this->load->model('ClotheModel');
     }
 
-    public function clotheDetail(){
-        $clotheid=$this->input->post('clotheid');
-        $clothedata=$this->ClotheModel->getclothe($clotheid);
-        $this->json([
-            'code' => 1,
-            'data' => $clothedata
-        ]);
-    }
-    public function addClothe()
-    {
-        $openid=$this->input->post('openid');
-        $url=$this->input->post('url');
-        $cid=$this->ClotheModel->addclothe($openid,$url);
-        if($cid!=-1)
-        {
-            echo 'true:'.$cid;
-        }
-        else
-        {
-            echo 'false:系统错误';
-        }
-    }
+
 
     public function index() {
         // 处理文件上传
