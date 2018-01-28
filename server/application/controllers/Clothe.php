@@ -22,7 +22,8 @@ class Clothe extends CI_Controller {
     {
         $openid=$this->input->post('openid');
         $url=$this->input->post('url');
-        $cid=$this->ClotheModel->addclothe($openid,$url);
+        $title=$this->input->post('title');
+        $cid=$this->ClotheModel->addclothe($openid,$url,$title);
         if($cid!=-1)
         {
             echo 'true:'.$cid;

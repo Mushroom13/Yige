@@ -27,13 +27,13 @@
   <view class="content">
     <view class="content-item2">
       <view class="section">
-        <input placeholder="" focus="{{focus}}" class="input-area" />
+        <input placeholder="" focus="{{focus}}" class="input-area" bindinput="linkChange" value="{{linkinput}}" />
         <view class="buttoncontent">
           <view class="btn-area">
-            <button class="buttontext" bindtap="bindButtonTap">上传</button>
+            <button class="buttontext" bindtap="bindUploadLinkButtonTap">上传</button>
           </view>
           <view class="btn-area">
-            <button class="buttontext" bindtap="bindButtonTap">取消</button>
+            <button class="buttontext" bindtap="bindCancelLinkButtonTap">取消</button>
           </view>
         </view>
       </view>

@@ -8,9 +8,10 @@ Page({
   /**
    * 页面的初始数据
   //  */
-  // data: {
-  
-  // },
+  data: {
+    linktemp: '',
+    linkinput:'',
+  },
   onTouch: function (event) {
     wx.chooseImage({
       count: 1, // 默认9
@@ -110,9 +111,9 @@ Page({
           success: function (res) {
             res = JSON.parse(res.data)
             console.log(res)
-            if (res.code==1)
+            if (res.code!=1)
             {
-              util.showModel('上传失败', res.data)
+              util.showModel('上传失败', res.error)
             }
             else
             {
@@ -157,7 +158,8 @@ Page({
       method: 'POST',
       data: {
         openid: app.globalData.userInfo.openId,
-        url: that.data.imgUrl
+        url: that.data.imgUrl,
+        title:'暂无描述'
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -187,5 +189,76 @@ Page({
       imgUrl: null,
       OriimgUrl: "../../images/2.jpg"
     })
-  }
+  },
+  bindUploadLinkButtonTap:function(){
+    var link = this.data.linktemp;
+    if (link!='')
+    {
+      var that = this;
+      util.showBusy('正在读取网页')
+      wx.request({
+        url: app.globalData.hosturl + 'upload/uploadLink',
+        method: 'POST',
+        data: {
+          clotheUrl: link,
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          res = res.data
+          console.log(res)
+          if (res.code != 1) {
+            util.showModel('网页读取失败', res.error)
+          }
+          else {
+            //上传图片
+            util.showBusy('正在上传信息')
+            wx.request({
+              url: app.globalData.hosturl + 'clothe/addClothe',
+              method: 'POST',
+              data: {
+                openid: app.globalData.userInfo.openId,
+                url: res.data.imgUrl,
+                title: res.data.title
+              },
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              success: function (res) {
+                util.showSuccess('上传成功')
+                var resArray = res.data.toString().split(":");
+                if (resArray[0] == 'true') {
+                  that.setData({
+                    linktemp: '',
+                    linkinput: ''
+                  })
+                  wx.navigateTo({
+                    url: '../clothe/clothe?cid=' + resArray[1]
+                  })
+                }
+                else {
+                  util.showModel('上传失败', resArray[1])
+                }
+              }
+            })
+          }
+        },
+        fail: function (e) {
+          util.showModel('网页读取失败', '网页可能不存在')
+        }
+      })
+    }
+  },
+  bindCancelLinkButtonTap:function(){
+    this.setData({
+      linktemp: '',
+      linkinput:''
+    })
+  },
+  linkChange: function (e) {
+    this.setData({
+      linktemp: e.detail.value
+    })
+  },
 })

@@ -6,10 +6,11 @@ class ClotheModel extends CI_Model
     {
         $this->load->database();
     }
-    public function addclothe($openid,$url)
+    public function addclothe($openid,$url,$title)
     {
         $data = array(
             'clotheimg' => $url,
+            'clothedetail' => $title
         );
         if($this->db->insert('clothe', $data))
         {
