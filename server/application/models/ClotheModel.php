@@ -101,7 +101,7 @@ class ClotheModel extends CI_Model
         {
             $q4="clothe.clothetype='".$typekey."' ";
         }
-        if($colorkey==-1 and $seasonkey==-1 and $seasonkey==-1 )
+        if($colorkey==-1 and $seasonkey==-1 and $typekey==-1 )
         {
             $q5=" AND  clothe.clothedetail like '%".$value."%')";
         }
