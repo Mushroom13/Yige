@@ -32,7 +32,7 @@ function init(that, hotKeys, tipKeys, searchFunction, goBackFunction) {
   __goBackFunction = goBackFunction;
 
   var temData = {};
-  var barHeight = 43;
+  var barHeight = 0;
   var view = {
     barHeight: barHeight
   }
@@ -63,7 +63,7 @@ function wxSearchInput(e) {
     for (var i = 0; i < __tipKeys.length; i++) {
       var mindKey = __tipKeys[i];
       // 包含字符串
-      if (mindKey.indexOf(inputValue) != -1) {
+      if (inputValue.indexOf(mindKey) != -1) {
         tipKeys.push(mindKey);
       }
     }
@@ -92,6 +92,8 @@ function wxSearchClear() {
 
 // 点击提示或者关键字、历史记录时的操作
 function wxSearchKeyTap(e) {
+  var temp = { detail: { value: e.target.dataset.key } }
+  wxSearchInput(temp)
   search(e.target.dataset.key);
 }
 
@@ -116,7 +118,7 @@ function search(inputValue) {
       wxSearchData: temData
     });
     // 回调搜索
-    __searchFunction(inputValue);
+    __searchFunction(temData);
   }
 }
 

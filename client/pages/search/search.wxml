@@ -1,1 +1,22 @@
-<include src="../../wxSearchView/wxSearchView.wxml" />
+<view class="container">
+  <include src="../../wxSearchView/wxSearchView.wxml" />
+
+  <view class="nav_right">
+    <!--如果有数据，才遍历项-->
+    <view wx:if="{{cateItems}}">
+      <block wx:for="{{cateItems}}">
+        <view class="nav_right_items">
+          <!--界面跳转 -->
+          <navigator url="../clothe/clothe?cid={{item.clotheid}}">
+            <image src="{{item.clotheimg}}"></image>
+            <text>{{item.clothedetail}}</text>
+          </navigator>
+        </view>
+      </block>
+    </view>
+    <!--如果无数据，则显示数据-->
+    <view wx:if="{{isSearch}}">
+      <view class="nodata_text">无相关搜索结果</view>
+    </view>
+  </view>
+</view>

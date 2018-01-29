@@ -146,4 +146,128 @@ class Clothe extends CI_Controller {
             echo 'false:删除失败';
         }
     }
+    public function getResult()
+    {
+        $openid=$this->input->post('openid');
+        $value=$this->input->post('value');
+        $location=$this->input->post('currentTab');
+        $keys=explode(",",$this->input->post('keys'));
+        $seasonflag=0;
+        $colorflag=0;
+        $typeflag=0;
+        foreach ($keys as $key)
+        {
+            if($key=='春')
+            {
+                $seasonkey=0;
+                $seasonflag++;
+            }
+            if($key=='夏')
+            {
+                $seasonkey=1;
+                $seasonflag++;
+            }
+            if($key=='秋')
+            {
+                $seasonkey=0;
+                $seasonflag++;
+            }
+            if($key=='冬')
+            {
+                $seasonkey=2;
+                $seasonflag++;
+            }
+
+            if($key=='上衣')
+            {
+                $typekey=0;
+                $typeflag++;
+            }
+            if($key=='裤子')
+            {
+                $typekey=1;
+                $typeflag++;
+            }
+            if($key=='外套')
+            {
+                $typekey=2;
+                $typeflag++;
+            }
+            if($key=='鞋子')
+            {
+                $typekey=3;
+                $typeflag++;
+            }
+            if($key=='其他')
+            {
+                $typekey=4;
+                $typeflag++;
+            }
+
+            if($key=='黑')
+            {
+                $colorkey=0;
+                $colorflag++;
+            }
+            if($key=='白')
+            {
+                $colorkey=1;
+                $colorflag++;
+            }
+            if($key=='灰')
+            {
+                $colorkey=2;
+                $colorflag++;
+            }
+            if($key=='红')
+            {
+                $colorkey=3;
+                $colorflag++;
+            }
+            if($key=='棕')
+            {
+                $colorkey=4;
+                $colorflag++;
+            }
+            if($key=='橙')
+            {
+                $colorkey=5;
+                $colorflag++;
+            }
+            if($key=='黄')
+            {
+                $colorkey=6;
+                $colorflag++;
+            }
+            if($key=='绿')
+            {
+                $colorkey=7;
+                $colorflag++;
+            }
+            if($key=='蓝')
+            {
+                $colorkey=8;
+                $colorflag++;
+            }
+            if($key=='紫')
+            {
+                $colorkey=9;
+                $colorflag++;
+            }
+
+        }
+        if($seasonflag!=1)
+            $seasonkey=-1;
+        if($colorflag!=1)
+            $colorkey=-1;
+        if($typeflag!=1)
+            $typekey=-1;
+        $result=$this->ClotheModel->getResult($openid,$value,$location,$seasonkey,$colorkey,$typekey);
+        $this->json([
+            'code' => 1,
+            'data' => $result,
+            'length' => count($result)
+        ]);
+
+    }
 }
