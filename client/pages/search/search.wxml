@@ -2,6 +2,7 @@
   <include src="../../wxSearchView/wxSearchView.wxml" />
 
   <view class="nav_right">
+  <view wx:if="{{isSearch}}">
     <!--如果有数据，才遍历项-->
     <view wx:if="{{cateItems}}">
       <block wx:for="{{cateItems}}">
@@ -15,8 +16,8 @@
       </block>
     </view>
     <!--如果无数据，则显示数据-->
-    <view wx:if="{{isSearch}}">
-      <view class="nodata_text">无相关搜索结果</view>
+    
+      <view class="nodata_text" wx:else>无相关搜索结果</view>
     </view>
   </view>
 </view>

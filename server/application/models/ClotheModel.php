@@ -84,10 +84,11 @@ class ClotheModel extends CI_Model
     public function getResult($openid,$value,$location,$seasonkey,$colorkey,$typekey){
 
         $q1="SELECT clothe.* FROM clothe , clothespress WHERE openid='".$openid."' AND clothe.clotheid=clothespress.clotheid 
-        AND clothe.location='".$location."' AND ( clothe.clothedetail like '%".$value."%' OR (";
+        AND clothe.location='".$location."' AND (";
         $q2="1";
         $q3="1";
         $q4="1";
+        $q5=" OR clothe.clothedetail like '%".$value."%')";
         if($colorkey!=-1)
         {
             $q2="clothe.clothecolor='".$colorkey."' ";
@@ -100,7 +101,11 @@ class ClotheModel extends CI_Model
         {
             $q4="clothe.clothetype='".$typekey."' ";
         }
-        $q=$q1.$q2.' AND '.$q3.' AND '.$q4.'))';
+        if($colorkey==-1 and $seasonkey==-1 and $seasonkey==-1 )
+        {
+            $q5=" AND  clothe.clothedetail like '%".$value."%')";
+        }
+        $q=$q1.$q2.' AND '.$q3.' AND '.$q4.$q5;
 
         $query=$this->db->query($q);
         return $query->result_array();

@@ -57,9 +57,19 @@ Page({
         })
         if (res.data.code == 1) {
           var alldata = res.data.data
-          that.setData({
+          console.log(alldata)
+          if(alldata.length>0)
+          {
+            that.setData({
               cateItems: alldata,
             })
+          }
+          else
+          {
+            that.setData({
+              cateItems: null,
+            })
+          }
         }
       }
     });
