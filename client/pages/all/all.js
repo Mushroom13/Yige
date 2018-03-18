@@ -117,7 +117,6 @@ Page({
       curIndex: options.nowid - 1,
     })
     var that = this;
-    
     wx.request({
       url: app.globalData.hosturl + 'clothe/getAll',
       method: 'POST',
@@ -130,16 +129,19 @@ Page({
       success: function (res) {
         console.log(res.data)
         if (res.data.code == 1) {
+          
           var alldata = res.data.data
           var jsonArray = new Array();
           var jsonCount = new Array();
           var likeArray = new Array();
           var likeCount = new Array();
+          var cateItems = that.data.cateItems;
+          var likeItems = that.data.likeItems;
           for (var i = 0; i < 6; i++) {
-            that.data.cateItems[i].children = new Array();
-            that.data.cateItems[i].ishaveChild = false;
-            that.data.likeItems[i].children = new Array();
-            that.data.likeItems[i].ishaveChild = false;
+            cateItems[i].children = new Array();
+            cateItems[i].ishaveChild = false;
+            likeItems[i].children = new Array();
+            likeItems[i].ishaveChild = false;
             jsonArray[i] = new Array();
             jsonCount[i] = 0;
             likeArray[i] = new Array();
@@ -158,8 +160,8 @@ Page({
                 cid: item.clotheid
               }//新建全部项
 
-              that.data.cateItems[0].children.push(alljson)//将全部项增加到全部数组中
-              that.data.cateItems[0].ishaveChild = true;
+              cateItems[0].children.push(alljson)//将全部项增加到全部数组中
+              cateItems[0].ishaveChild = true;
               var itemtype = parseInt(item.clothetype) + 1;
               jsonCount[itemtype]++;//对应项的总数加一
               var ajson = {
@@ -169,8 +171,8 @@ Page({
                 cid: item.clotheid
               }//新建某一项
 
-              that.data.cateItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
-              that.data.cateItems[itemtype].ishaveChild = true;
+              cateItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
+              cateItems[itemtype].ishaveChild = true;
             }
             else {
               likeCount[0]++;//全部项的总数加一
@@ -181,8 +183,8 @@ Page({
                 cid: item.clotheid
               }//新建全部项
 
-              that.data.likeItems[0].children.push(alljson)//将全部项增加到全部数组中
-              that.data.likeItems[0].ishaveChild = true;
+              likeItems[0].children.push(alljson)//将全部项增加到全部数组中
+              likeItems[0].ishaveChild = true;
               var itemtype = parseInt(item.clothetype) + 1;
               likeCount[itemtype]++;//对应项的总数加一
               var ajson = {
@@ -192,14 +194,14 @@ Page({
                 cid: item.clotheid
               }//新建某一项
 
-              that.data.likeItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
-              that.data.likeItems[itemtype].ishaveChild = true;
+              likeItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
+              likeItems[itemtype].ishaveChild = true;
             }
 
           }
           that.setData({
-            cateItems: that.data.cateItems,
-            likeItems: that.data.likeItems
+            cateItems: cateItems,
+            likeItems: likeItems
           })
           wx.getSystemInfo({
             success: function (res) {
@@ -212,6 +214,9 @@ Page({
         else {
           util.showModel('加载失败', res.data.error)
         }
+      },
+      fail(error) {
+        util.showModel('请求失败', error)
       }
     })
   },
@@ -285,11 +290,13 @@ Page({
           var jsonCount = new Array();
           var likeArray = new Array();
           var likeCount = new Array();
+          var cateItems = that.data.cateItems;
+          var likeItems = that.data.likeItems;
           for (var i = 0; i < 6; i++) {
-            that.data.cateItems[i].children = new Array();
-            that.data.cateItems[i].ishaveChild = false;
-            that.data.likeItems[i].children = new Array();
-            that.data.likeItems[i].ishaveChild = false;
+            cateItems[i].children = new Array();
+            cateItems[i].ishaveChild = false;
+            likeItems[i].children = new Array();
+            likeItems[i].ishaveChild = false;
             jsonArray[i] = new Array();
             jsonCount[i] = 0;
             likeArray[i] = new Array();
@@ -308,8 +315,8 @@ Page({
                 cid: item.clotheid
               }//新建全部项
 
-              that.data.cateItems[0].children.push(alljson)//将全部项增加到全部数组中
-              that.data.cateItems[0].ishaveChild = true;
+              cateItems[0].children.push(alljson)//将全部项增加到全部数组中
+              cateItems[0].ishaveChild = true;
               var itemtype = parseInt(item.clothetype) + 1;
               jsonCount[itemtype]++;//对应项的总数加一
               var ajson = {
@@ -319,8 +326,8 @@ Page({
                 cid: item.clotheid
               }//新建某一项
 
-              that.data.cateItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
-              that.data.cateItems[itemtype].ishaveChild = true;
+              cateItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
+              cateItems[itemtype].ishaveChild = true;
             }
             else {
 
@@ -332,8 +339,8 @@ Page({
                 cid: item.clotheid
               }//新建全部项
 
-              that.data.likeItems[0].children.push(alljson)//将全部项增加到全部数组中
-              that.data.likeItems[0].ishaveChild = true;
+              likeItems[0].children.push(alljson)//将全部项增加到全部数组中
+              likeItems[0].ishaveChild = true;
               var itemtype = parseInt(item.clothetype) + 1;
               likeCount[itemtype]++;//对应项的总数加一
               var ajson = {
@@ -343,14 +350,14 @@ Page({
                 cid: item.clotheid
               }//新建某一项
 
-              that.data.likeItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
-              that.data.likeItems[itemtype].ishaveChild = true;
+              likeItems[itemtype].children.push(ajson)//将这一项增加到对应数组中
+              likeItems[itemtype].ishaveChild = true;
             }
 
           }
           that.setData({
-            cateItems: that.data.cateItems,
-            likeItems: that.data.likeItems
+            cateItems: cateItems,
+            likeItems: likeItems
           })
           wx.getSystemInfo({
             success: function (res) {

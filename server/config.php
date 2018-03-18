@@ -25,7 +25,7 @@ $config = [
         'port' => 3306,
         'user' => 'root',
         'db'   => 'cAuth',
-        'pass' => 'wx7d40498f333efe4e',
+        'pass' => '112119110',
         'char' => 'utf8mb4'
     ],
 
@@ -49,5 +49,16 @@ $config = [
 
     // 微信登录态有效期
     'wxLoginExpires' => 7200,
-    'wxMessageToken' => 'abcdefgh'
+    'wxMessageToken' => 'abcdefgh',
+    // 其他配置
+    'serverHost' => 'yige.otouto.pw',
+    'tunnelServerUrl' => 'http://tunnel.ws.qcloud.la',
+    'tunnelSignatureKey' => '27fb7d1c161b7ca52d73cce0f1d833f9f5b5ec89',
+      // 腾讯云相关配置可以查看云 API 秘钥控制台：https://console.cloud.tencent.com/capi
+    'qcloudAppId' => 1200000000,// 必须是数字
+    'qcloudSecretId' => 'AKIDKTO4btymNksnZ9kXMwHNFrDNK3Xn7dCV',
+    'qcloudSecretKey' => 'B7pHURBdqnUw96yd2C6lBLFwQfeNuDI9',
+    'qcloudAppId' => 1252906383,
+    'networkTimeout' => 30000,
+
 ];
