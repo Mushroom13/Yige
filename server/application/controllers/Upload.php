@@ -11,86 +11,118 @@ class Upload extends CI_Controller {
         parent::__construct();
         $this->load->helper("simple_html_dom");
     }
+    private function request_by_curl($remote_server, $post_string) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $remote_server);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, 'tkl=' . $post_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+        $data = curl_exec($ch);
+        curl_close($ch);
 
+        return $data;
+    }
     public function uploadLink()
     {
         $clotheUrl=$this->input->post('clotheUrl');
-        if(strpos($clotheUrl, 'http') != 0)
-        {
-            $clotheUrl='https://'+$clotheUrl;
-        }
-        try{
-            $html = file_get_html($clotheUrl);
-            $picUrl = "";
-            // 获取网页上的第一张图片
-            foreach($html->find('img') as $element)
-            {
-                $Url=$element->src;
-                if(strrchr($Url,'jpg')=='jpg')
-                {
-                    if(strpos($Url, '//') == 0)
-                    {
-                        $picUrl="http:".$element->src;
+        $firstletter=substr($clotheUrl,0,1);
+        if(preg_match("/^[a-zA-Z]+$/", $firstletter)) {
+
+
+            if (strpos($clotheUrl, 'http') != 0) {
+                $clotheUrl = 'https://' + $clotheUrl;
+            }
+            try {
+                $html = file_get_html($clotheUrl);
+                $picUrl = "";
+                // 获取网页上的第一张图片
+                foreach ($html->find('img') as $element) {
+                    $Url = $element->src;
+                    if (strrchr($Url, 'jpg') == 'jpg') {
+                        if (strpos($Url, '//') == 0) {
+                            $picUrl = "http:" . $element->src;
+                        } elseif (strpos($Url, 'http') != 0) {
+                            $picUrl = "http://" . $element->src;
+                        } else {
+                            $picUrl = $element->src;
+                        }
+                        break;
                     }
-                    elseif (strpos($Url, 'http') != 0)
-                    {
-                        $picUrl="http://".$element->src;
+
+                }
+                if ($picUrl == "") {
+                    $this->json([
+                        'code' => 0,
+                        'error' => "该网页捕捉不到图片"
+                    ]);
+                } else {
+                    //获取淘宝标题
+                    $title = $html->find('h3[class=tb-main-title]', 0);
+                    if (!$title) {
+                        $title = $html->find('h1[data-spm=1000983]', 0);
                     }
-                    else
-                    {
-                        $picUrl=$element->src;
+                    if (!$title) {
+                        $title = '暂无描述';
+                    } else {
+                        $title = trim($title->innertext);
                     }
-                    break;
+                    $encode = mb_detect_encoding($title, array('ASCII', 'UTF-8', 'GB2312', 'GBK', 'BIG5'));
+                    $utf8title = mb_convert_encoding($title, "UTF-8", $encode);
+                    //将图片保存到本地
+                    $img = file_get_contents($picUrl);
+                    $filePath = md5(mt_rand()) . '-' . 'img.jpg';
+                    file_put_contents($filePath, $img);
+                    $file = array(
+                        'name' => 'img.jpg',
+                        'tmp_name' => $filePath,
+                        'size' => filesize($filePath),
+                        'type' => 'image/jpg'
+                    );
+                    $result = $this->uploadToBucket($file);
+                    unlink($filePath);
+                    $result['data']['title'] = $utf8title;
+                    $this->json($result);
                 }
 
-            }
-            if($picUrl=="")
-            {
+
+            } catch (Exception $e) {
                 $this->json([
-                    'code' => 0,
-                    'error' => "该网页捕捉不到图片"
+                    'code' => -1,
+                    'error' => $e->__toString()
                 ]);
             }
-            else
-            {
-                //获取淘宝标题
-                $title = $html->find('h3[class=tb-main-title]',0);
-                if(!$title)
-                {
-                    $title=$html->find('h1[data-spm=1000983]',0);
-                }
-                if(!$title)
-                {
-                    $title='暂无描述';
-                }
-                else
-                {
-                    $title=trim($title->innertext);
-                }
-                $encode = mb_detect_encoding($title, array('ASCII','UTF-8','GB2312','GBK','BIG5'));
-                $utf8title=mb_convert_encoding($title, "UTF-8", $encode);
+        }
+        else{
+            try{
+                $res=$this->request_by_curl('http://api.chaozhi.hk/tb/tklParse',$clotheUrl );
+                $jsondict=json_decode($res,true);
+                $data=$jsondict['data'];
+                $picUrl=$data['thumb_pic_url'];
+                $title=$data['content'];
+                $encode = mb_detect_encoding($title, array('ASCII', 'UTF-8', 'GB2312', 'GBK', 'BIG5'));
+                $utf8title = mb_convert_encoding($title, "UTF-8", $encode);
                 //将图片保存到本地
                 $img = file_get_contents($picUrl);
-                $filePath=md5(mt_rand()) . '-' .'img.jpg';
-                file_put_contents($filePath,$img);
-                $file=array(
-                    'name'=>'img.jpg',
-                    'tmp_name'=>$filePath,
-                    'size'=> filesize($filePath),
-                    'type'=>'image/jpg'
+                $filePath = md5(mt_rand()) . '-' . 'img.jpg';
+                file_put_contents($filePath, $img);
+                $file = array(
+                    'name' => 'img.jpg',
+                    'tmp_name' => $filePath,
+                    'size' => filesize($filePath),
+                    'type' => 'image/jpg'
                 );
-                $result=$this->uploadToBucket($file);
+                $result = $this->uploadToBucket($file);
                 unlink($filePath);
-                $result['data']['title']=$utf8title;
+                $result['data']['title'] = $utf8title;
                 $this->json($result);
+
+            }catch (Exception $e) {
+                $this->json([
+                    'code' => -1,
+                    'error' => $e->__toString()
+                ]);
             }
 
-
-        }catch (Exception $e) {
-            $this->json([
-                'code' => -1,
-                'error' => $e->__toString()
-            ]);
         }
 
     }

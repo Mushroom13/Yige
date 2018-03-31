@@ -8,7 +8,7 @@ Page({
     
       {
         cid: 0,
-        img: "../../images/3.jpg",
+        img: "../../images/5.jpg",
       },
     ],
     contentItems:['','','',''],
@@ -43,7 +43,7 @@ Page({
             that.setData({
               imgUrls: [{
                 cid: 0,
-                img: "../../images/3.jpg",
+                img: "../../images/5.jpg",
                 }]
             })
           }
@@ -92,7 +92,7 @@ Page({
            that.setData({
              imgUrls: [{
                cid: 0,
-               img: "../../images/3.jpg",
+               img: "../../images/5.jpg",
              }]
            })
          }

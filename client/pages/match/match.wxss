@@ -1,0 +1,19 @@
+/* pages/match/match.wxss */
+.content-img{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  padding-bottom: 15px;
+}
+.part{
+  margin-top: 20px;
+  border-top: 3px solid #ddd;
+}
+.slide-image {
+  width: 60%;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+.swiperpart{
+  height: 250px;
+}

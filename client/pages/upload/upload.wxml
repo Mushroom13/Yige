@@ -1,11 +1,12 @@
 <view class="selection">
   <view class="header">
-      <text class="text-header">图片上传</text>
+    <text class="text-header">图片上传</text>
   </view>
   <view class="content">
     <view class="content-item" bindtap="doUpload">
       <image src="{{OriimgUrl}}" />
     </view>
+
     <view wx:if="{{imgUrl}}">
       <image class="newimg" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
       <view class="buttoncontent">
@@ -17,6 +18,8 @@
         </view>
       </view>
     </view>
+     <text class="text-tip">一个tip：
+    建议上传图片比例1:1，背景杂物越少识别越准确哦^_^</text>
   </view>
 </view>
 

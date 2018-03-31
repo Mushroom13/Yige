@@ -88,7 +88,14 @@
   border-left-style: solid;
   border-left-color: #cd3b3b;
 }
-
+.text-tip {
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+  color: gray;
+  font-size: 14px;
+  border-left-width: 2px;
+}
 .uploader, .tunnel {
   height: auto;
   padding: 0 0 0 40rpx;

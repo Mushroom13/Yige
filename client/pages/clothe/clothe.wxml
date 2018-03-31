@@ -3,9 +3,9 @@
     <view class="content-img">
       <image style="width: 280px; height: 280px; background-color: #eeeeee;" mode="aspectFit" src="{{imgUrl}}"></image>
     </view>
-    <view class="weui-panel weui-panel_access">
+    <!-- <view class="weui-panel weui-panel_access"> -->
+    <view class="part">
       <view class="weui-panel__hd">描述</view>
-
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text">
           <picker bindchange="bindPickerChange_type" value="{{typeindex}}" range="{{typearray}}">
@@ -15,86 +15,107 @@
         </view>
       </view>
 
+
       <view class="weui-panel__ft">
         <view class="weui-cell weui-cell_access weui-cell_link">
           <view class="container" class="zn-uploadimg">
             <view class="weui-cell__bd" bindtap="modalinput">修改描述</view>
           </view>
-          <modal hidden="{{hiddenmodalput}}" title="修改描述" confirm-text="提交" cancel-text="取消" bindcancel="onCancel" bindconfirm="onConfirm">
-            <input name="detail" bindinput="detailChange" value="{{detailtemp}}"/>
+          <modal hidden="{{hiddenmodalput}}" title="修改描述"  confirm-text="提交" cancel-text="取消" bindcancel="onCancel" bindconfirm="onConfirm" >
+            <input name="detail" bindinput="detailChange" value="{{detailtemp}}" />
           </modal>
         </view>
       </view>
     </view>
-    <view class="weui-panel">
-      <view class="weui-panel__hd">属性</view>
-      <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_small-appmsg">
-          <view class="weui-cells weui-cells_in-small-appmsg">
 
-            <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-              <view class="weui-cell__hd">
-                <image src="../../images/color.png" style="width: 20px;height: 20px;margin-right: 5px" />
+    <view class="part">
+      <view class="weui-panel">
+        <view class="weui-panel__hd">属性</view>
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_small-appmsg">
+            <view class="weui-cells weui-cells_in-small-appmsg">
+
+              <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                  <image src="../../images/color.png" style="width: 20px;height: 20px;margin-right: 5px;padding-left:3px;" />
+                </view>
+                <view class="weui-cell__bd weui-cell_primary">
+                  <picker bindchange="bindPickerChange_color" value="{{colorindex}}" range="{{colorarray}}">
+                    <view class="picker">
+                      {{colorarray[colorindex]}}
+                    </view>
+                  </picker>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
               </view>
-              <view class="weui-cell__bd weui-cell_primary">
-                <picker bindchange="bindPickerChange_color" value="{{colorindex}}" range="{{colorarray}}">
-                  <view class="picker">
-                    {{colorarray[colorindex]}}
-                  </view>
-                </picker>
+
+              <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                  <image src="../../images/season.png" style="width: 20px;height: 20px;margin-right: 5px;padding-left:3px;" />
+                </view>
+                <view class="weui-cell__bd weui-cell_primary">
+                  <picker bindchange="bindPickerChange_season" value="{{seasonindex}}" range="{{seasonarray}}">
+                    <view class="picker">
+                      {{seasonarray[seasonindex]}}
+                    </view>
+                  </picker>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
               </view>
-              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+
+              <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                  <image src="../../images/location.png" style="width: 20px;height: 20px;margin-right: 5px;padding-left:3px;" />
+                </view>
+                <view class="weui-cell__bd weui-cell_primary">
+                  <picker bindchange="bindPickerChange_location" value="{{locationindex}}" range="{{locationarray}}">
+                    <view class="picker">
+                      {{locationarray[locationindex]}}
+                    </view>
+                  </picker>
+                </view>
+
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </view>
+
+              <view class="like">
+                <view class="likecon">
+                  <image src="../../images/like.png" style="width: 20px;height: 20px;margin-right: 5px" />                
+                </view>
+                 <text>喜爱度</text>
+                <view class="star">
+                  <block wx:for="{{stars}}" wx:key="item.id">
+                    <image class="star-image" style="left: {{item*30}}rpx " src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
+                      <view class="item" style="left:0rpx" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
+                      <view class="item" style="left:15rpx" data-key="{{item+1}}" bindtap="selectRight"></view>
+                    </image>
+                  </block>
+                </view>
+              </view>
             </view>
 
-            <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-              <view class="weui-cell__hd">
-                <image src="../../images/season.png" style="width: 20px;height: 20px;margin-right: 5px" />
-              </view>
-              <view class="weui-cell__bd weui-cell_primary">
-                <picker bindchange="bindPickerChange_season" value="{{seasonindex}}" range="{{seasonarray}}">
-                  <view class="picker">
-                    {{seasonarray[seasonindex]}}
-                  </view>
-                </picker>
-              </view>
-              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-            </view>
-
-            <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-              <view class="weui-cell__hd">
-                <image src="../../images/location.png" style="width: 20px;height: 20px;margin-right: 5px" />
-              </view>
-              <view class="weui-cell__bd weui-cell_primary">
-                <picker bindchange="bindPickerChange_location" value="{{locationindex}}" range="{{locationarray}}">
-                  <view class="picker">
-                    {{locationarray[locationindex]}}
-                  </view>
-                </picker>
-              </view>
-
-              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-            </view>
-
-            <view class="like">
-              <text>喜爱度</text>
-              <view class="star">
-                <block wx:for="{{stars}}" wx:key="item.id">
-                  <image class="star-image" style="left: {{item*30}}rpx " src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
-                    <view class="item" style="left:0rpx" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
-                    <view class="item" style="left:15rpx" data-key="{{item+1}}" bindtap="selectRight"></view>
-                  </image>
-                </block>
-              </view>
-            </view>
           </view>
-
         </view>
       </view>
     </view>
-    <view class="button-sp-area">
-      <button class="weui-btn" type="primary">推荐搭配</button>
-      <button class="weui-btn" type="warn" bindtap="modalcnt">删除</button>
+
+    <view class='part'>
+      <view class="weui-panel__hd">推荐搭配</view>
+      <swiper indicator-dots="true" autoplay="true" interval="3000" duration="1000" circular="true" class="swiperpart">
+        <block wx:for="{{imgUrls}}">
+          <swiper-item>
+            <navigator url="../match/match?cid={{item.cid}}">
+              <image src="{{item.img}}" class="slide-image" mode="aspectFit" />
+            </navigator>
+          </swiper-item>
+        </block>
+      </swiper>
     </view>
 
+    <view class='deletepart'>
+      <view class="button-sp-area">
+        <button class="weui-btn" type="warn" bindtap="modalcnt">删 除</button>
+      </view>
+    </view>
   </view>
 </view>

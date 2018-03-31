@@ -7,6 +7,18 @@ image{
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  padding-bottom: 15px;
+}
+.part{
+  border-top: 3px solid #ddd;
+}
+.swiperpart{
+  height: 250px;
+}
+.slide-image {
+  width: 60%;
+  padding-left: 20%;
+  padding-right: 20%;
 }
 
 .like {
@@ -26,7 +38,9 @@ image{
   position: relative;
   display: flex;
 }
-
+.likecon{
+  padding-top: 17px;
+}
 .star-image {
   position: relative;
   width: 50rpx;
@@ -41,4 +55,10 @@ image{
   top: 50rpx;
   width: 50rpx;
   height: 80rpx;
+}
+.deletepart{
+    border-top: 3px solid #ddd;
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
 }

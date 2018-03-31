@@ -99,7 +99,7 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        util.showBusy('正在上传')
+        util.showBusy('正在加载')
         var filePath = res.tempFilePaths[0]
         //console.log(filePath)
         // 上传图片
@@ -113,7 +113,7 @@ Page({
             console.log(res)
             if (res.code!=1)
             {
-              util.showModel('上传失败', res.error)
+              util.showModel('加载失败', res.error)
             }
             else
             {
@@ -153,6 +153,7 @@ Page({
   },
   bindButtonTap: function () {
     var that = this;
+    util.showBusy('正在努力识别')
     wx.request({
       url: app.globalData.hosturl + 'clothe/addClothe',
       method: 'POST',
@@ -165,20 +166,35 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
+        console.log(res)
         util.showSuccess('上传成功')
-        var resArray = res.data.toString().split(":");
-        if (resArray[0] == 'true') {
+        res = res.data
+        if (res.result != 1) {
+          util.showModel('加载失败', res.error)
+        }
+        else {
+          wx.request({
+            url: app.globalData.hosturl + 'clothe/getRecommend',
+            method: 'POST',
+            data: {
+              clotheid: res.cid,
+              filepath: res.filepath
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: function (res) {
+            }
+          })
           that.setData({
             imgUrl: null,
             OriimgUrl: "../../images/2.jpg"
           })
           wx.navigateTo({
-            url: '../clothe/clothe?cid=' + resArray[1]
+            url: '../clothe/clothe?cid=' + res.cid
           })
         }
-        else {
-          util.showModel('上传失败', resArray[1])
-        }
+
       }
     })
     
@@ -227,18 +243,32 @@ Page({
               },
               success: function (res) {
                 util.showSuccess('上传成功')
-                var resArray = res.data.toString().split(":");
-                if (resArray[0] == 'true') {
+                res = res.data
+                console.log(res)
+                if (res.result != 1) {
+                  util.showModel('加载失败', res.error)
+                }
+                else {
+                  wx.request({
+                    url: app.globalData.hosturl + 'clothe/getRecommend',
+                    method: 'POST',
+                    data: {
+                      clotheid: res.cid,
+                      filepath: res.filepath
+                    },
+                    header: {
+                      'content-type': 'application/x-www-form-urlencoded'
+                    },
+                    success: function (res) {
+                    }
+                  })
                   that.setData({
                     linktemp: '',
                     linkinput: ''
                   })
                   wx.navigateTo({
-                    url: '../clothe/clothe?cid=' + resArray[1]
+                    url: '../clothe/clothe?cid=' + res.cid
                   })
-                }
-                else {
-                  util.showModel('上传失败', resArray[1])
                 }
               }
             })

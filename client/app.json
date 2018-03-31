@@ -3,14 +3,14 @@
     "pages/login/login",
     "pages/index/index",
     "pages/all/all",
+    "pages/clothe/clothe",
     "pages/me/me",
     "pages/like/like",
     "pages/upload/upload",
     "pages/personal/personal",
-    "pages/clothe/clothe",
-    "pages/statistics/statistics",
     "pages/analyze/analyze",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/match/match"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -43,5 +43,11 @@
         "selectedIconPath": "images/user-hl.png"
       }
     ]
+  },
+  "networkTimeout":{
+    "request":180000,
+    "connectSocket":180000,
+    "uploadFile":180000,
+    "downloadFile":180000
   }
 }

@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #cd3b3b;
+  background-color: #a22424;
   padding-bottom: 30px;
 }
 

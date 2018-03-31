@@ -1,0 +1,18 @@
+<view >
+  <view class="weui-panel__hd">搭配效果</view>
+  <view class="content-img">
+    <image style="width: 280px; height: 280px; background-color: #eeeeee;" mode="aspectFit" src="{{imgUrl}}"></image>
+  </view>
+</view>
+<view class='part'>
+  <view class="weui-panel__hd">推荐单品</view>
+  <swiper indicator-dots="true" autoplay="true" interval="3000" duration="1000" circular="true" class="swiperpart">
+    <block wx:for="{{imgUrls}}">
+      <swiper-item >
+        <navigator url="../clothe/clothe?cid={{item.cid}}">
+          <image src="{{item.img}}" class="slide-image" mode="aspectFit" />
+        </navigator>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>

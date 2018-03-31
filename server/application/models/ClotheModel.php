@@ -6,11 +6,17 @@ class ClotheModel extends CI_Model
     {
         $this->load->database();
     }
-    public function addclothe($openid,$url,$title)
+    public function addclothe($openid,$url,$title,$type,$color,$season,$r,$g,$b)
     {
         $data = array(
             'clotheimg' => $url,
-            'clothedetail' => $title
+            'clothedetail' => $title,
+            'clothetype'=> $type,
+            'clothecolor'=> $color,
+            'clotheseason'=>$season,
+            'r'=>$r,
+            'g'=>$g,
+            'b'=>$b
         );
         if($this->db->insert('clothe', $data))
         {
@@ -26,6 +32,24 @@ class ClotheModel extends CI_Model
         {
             return -1;
         }
+    }
+    public function setHog($clotheid,$hog){
+        $data = array(
+            'hog' => $hog,
+        );
+        return $this->db->update('clothe',$data,array('clotheid'=>$clotheid));
+    }
+    public function addRecommend($clotheid,$i,$j,$k){
+        $this->db->insert('clotherecommend', array(
+            'clotheid' => $clotheid,
+            'i'=>$i,
+            'j'=>$j,
+            'k'=>$k
+        ));
+    }
+    public function getRecommend($clotheid){
+        $query=$this->db->query("SELECT i FROM `clotherecommend` WHERE clotheid=".$clotheid);
+        return $query->result_array();
     }
     public function getclothe($clotheid){
         $query = $this->db->get_where('clothe', array('clotheid' => $clotheid));

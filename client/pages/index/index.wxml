@@ -5,6 +5,10 @@
   </view>
 </view>
 
+<!-- <view class="selection">
+  <image  src="../../images/4.jpg" />
+</view> -->
+
 <view class="selection">
   <view class="header">
     <text class="text-header">我的衣橱</text>
@@ -23,6 +27,12 @@
     <view class="content-item" catchtap="onTouch" id="5">
       <image src="../../images/home4.png" />
     </view>
+    <view class="content-item" catchtap="onTouch" id="6">
+      <image src="../../images/home5.png" />
+    </view>
+    <view class="content-item" catchtap="onTouch" id="7">
+      <image src="../../images/home6.png" />
+    </view>
   </view>
 </view>
 
@@ -31,9 +41,9 @@
     <text class="text-header">我的收藏</text>
     <text class="text-all" catchtap="onTouchLike">全部</text>
   </view>
-  <swiper indicator-dots="true" autoplay="true" interval="3000" duration="1000" circular="true">
+  <swiper indicator-dots="true" autoplay="true" interval="3000" duration="1000" circular="true" class="swiperpart">
     <block wx:for="{{imgUrls}}">
-      <swiper-item>
+      <swiper-item >
         <navigator url="../clothe/clothe?cid={{item.cid}}">
           <image src="{{item.img}}" class="slide-image" mode="aspectFit" />
         </navigator>

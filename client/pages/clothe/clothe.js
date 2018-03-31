@@ -33,7 +33,7 @@ Page({
     ],
     locationindex: 0,
 
-    typearray: ['上衣', '裤子', '外套', '鞋子', '其他'],
+    typearray: ['上衣', '裤子', '外套', '裙子', '鞋子','其他'],
     objectTypeArray: [
       {
         id: 0,
@@ -49,16 +49,20 @@ Page({
       },
       {
         id: 3,
-        name: '鞋子'
+        name: '裙子'
       },
       {
         id: 4,
+        name: '鞋子'
+      },
+      {
+        id: 5,
         name: '其他'
       },
     ],
     typeindex: 0,
 
-    seasonarray: ['春秋', '夏季','冬季'],
+    seasonarray: ['春秋', '夏季','冬季','全年'],
     objectSeasonArray: [
       {
         id: 0,
@@ -72,6 +76,10 @@ Page({
         id: 2,
         name: '冬季'
       },
+      {
+        id: 3,
+        name: '全年'
+      }
     ],
     seasonindex: 0,
 
@@ -119,6 +127,14 @@ Page({
       },
     ],
     colorindex: 0,
+
+    imgUrls: [
+
+      {
+        cid: 0,
+        img: "../../images/5.jpg",
+      },
+    ],
   },
   bindPickerChange_location: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -242,7 +258,7 @@ Page({
       method: 'POST',
       data: {
         clotheid: that.data.cid,
-        clothestar: key,//这个错了
+        clothestar: key,
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -323,7 +339,17 @@ Page({
         if (res.data.code==1)
         {
           var data=res.data.data
+          var recommendData = res.data.recommendData
+          var imgurllist=[]
+          for (var r in recommendData) {
+              var imgurltemp={
+                cid: r.i,
+                img:app.globalData.hosturl+"pic/"+r.i+"/all.jpg",
+              }
+              imgurllist.push(imgurltemp)
+          }
           that.setData({
+            imgUrls: imgurllist,
             imgUrl: data.clotheimg,
             typeindex:data.clothetype,
             clothedetail:data.clothedetail,
@@ -331,6 +357,7 @@ Page({
             seasonindex:data.clotheseason,
             colorindex:data.clothecolor,
             key:data.clothestar,
+            detailtemp: data.clothedetail,
           })
         }
         else

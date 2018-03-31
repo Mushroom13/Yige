@@ -4,7 +4,7 @@
 	"miniprogramRoot": "./client",
 	"qcloudRoot": "./server",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -12,5 +12,6 @@
 	},
 	"appid": "wx7d40498f333efe4e",
 	"projectname": "yige-buto",
+	"libVersion": "1.9.91",
 	"condition": {}
 }
