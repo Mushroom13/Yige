@@ -12,6 +12,7 @@ class AnalyzeModel extends CI_Model
         (select count(*) from clothespress,clothe WHERE clothespress.openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clothetype=0 ) as shangyi,
         (select count(*) from clothespress,clothe WHERE clothespress.openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clothetype=1 ) as kuzi,
         (select count(*) from clothespress,clothe WHERE clothespress.openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clothetype=2 ) as waitao,
+        (select count(*) from clothespress,clothe WHERE clothespress.openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clothetype=3 ) as qunzi,
         (select count(*) from clothespress,clothe WHERE clothespress.openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clothetype=3 ) as xiezi,
         (select count(*) from clothespress,clothe WHERE clothespress.openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clothetype=4 ) as qita");
         return $query->result_array();
@@ -20,7 +21,8 @@ class AnalyzeModel extends CI_Model
         $query=$this->db->query("select 
         (select count(*) from clothespress,clothe WHERE clothespress.openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clotheseason=0 ) as chunqiu,
         (select count(*) from clothespress,clothe WHERE clothespress.openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clotheseason=1 ) as xia,
-        (select count(*) from clothespress,clothe WHERE clothespress.openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clotheseason=2 ) as dong");
+        (select count(*) from clothespress,clothe WHERE clothespress.openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clotheseason=2 ) as dong,
+        (select count(*) from clothespress,clothe WHERE clothespress.openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clotheseason=2 ) as quannian");
         return $query->result_array();
     }
     public function getColorData($openid)

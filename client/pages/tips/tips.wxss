@@ -1,0 +1,33 @@
+/* pages/tips/tips.wxss */
+.selection {
+  border-bottom: 1px solid #ddd;
+  height: 30px;
+  margin-top: 15px;
+  margin: 20px;
+}
+.img{
+  display: flex;
+  justify-content: center;
+}
+.mytext {
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+  color: gray;
+  font-size: 16px;
+  border-left-width: 2px;
+  border-left-style: solid;
+  border-left-color: #cd3b3b;
+  margin-bottom: 20px;
+}
+.text {
+  display: flex;
+  align-items: center;
+  padding-left: 2px;
+  color: gray;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.content {
+  margin-top: 50px;
+}

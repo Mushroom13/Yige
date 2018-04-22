@@ -12,13 +12,15 @@ Page({
       "shangyi":0,
       "kuzi":0,
       "waitao":0,
+      "qunzi":0,
       "xiezi":0,
       "qita":0
     },
     seasonData: {
       "chunqiu":0,
       "xia":0,
-      "dong":0
+      "dong":0,
+      "quannian":0
     },
     colorData:{
       "hei":0,
@@ -70,6 +72,9 @@ Page({
               name: '外套',
               data: parseInt(that.data.typeData['waitao']),
             }, {
+              name: '裙子',
+              data: parseInt(that.data.typeData['qunzi']),
+            },{
               name: '鞋子',
               data: parseInt(that.data.typeData['xiezi']),
             }, {
@@ -115,6 +120,9 @@ Page({
             }, {
               name: '冬季',
               data: parseInt(that.data.seasonData['dong']),
+            }, {
+              name: '全年',
+              data: parseInt(that.data.seasonData['quannian']),
             }
             ],
             width: windowWidth,

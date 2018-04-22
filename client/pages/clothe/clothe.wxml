@@ -104,7 +104,7 @@
       <swiper indicator-dots="true" autoplay="true" interval="3000" duration="1000" circular="true" class="swiperpart">
         <block wx:for="{{imgUrls}}">
           <swiper-item>
-            <navigator url="../match/match?cid={{item.cid}}">
+            <navigator url="../match/match?ri={{item.ri}}&rj={{item.rj}}&rk={{item.rk}}">
               <image src="{{item.img}}" class="slide-image" mode="aspectFit" />
             </navigator>
           </swiper-item>

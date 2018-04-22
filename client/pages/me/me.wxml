@@ -17,4 +17,10 @@
       <text class="mytext" catchtap="onTouchLike">衣橱统计</text>
     </view>
   </view>
+
+  <view class="selection">
+    <view>
+      <text class="mytext" catchtap="onTouchTips">使用须知</text>
+    </view>
+  </view>
 </view>

@@ -48,7 +48,7 @@ class ClotheModel extends CI_Model
         ));
     }
     public function getRecommend($clotheid){
-        $query=$this->db->query("SELECT i FROM `clotherecommend` WHERE clotheid=".$clotheid);
+        $query=$this->db->query("SELECT i,j,k FROM `clotherecommend` WHERE clotheid=".$clotheid);
         return $query->result_array();
     }
     public function getclothe($clotheid){
@@ -96,7 +96,10 @@ class ClotheModel extends CI_Model
         $query=$this->db->query("SELECT clothe.* FROM clothe , clothespress WHERE openid='".$openid."' AND clothe.clotheid=clothespress.clotheid");
         return $query->result_array();
     }
-
+    public function getAll2($openid){
+        $query=$this->db->query("SELECT clothe.clothetype, clothe.location,clothe.clotheid,clothe.clotheimg,clothe.clothedetail FROM clothe , clothespress WHERE openid='".$openid."' AND clothe.clotheid=clothespress.clotheid");
+        return $query->result_array();
+    }
     public function getMyLike($openid){
         $query=$this->db->query("SELECT clothe.clotheid as cid,clothe.clotheimg as img FROM clothe , clothespress WHERE openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=1 ORDER BY clothe.clothestar DESC LIMIT 0,5");
         return $query->result_array();
@@ -107,7 +110,7 @@ class ClotheModel extends CI_Model
     }
     public function getResult($openid,$value,$location,$seasonkey,$colorkey,$typekey){
 
-        $q1="SELECT clothe.* FROM clothe , clothespress WHERE openid='".$openid."' AND clothe.clotheid=clothespress.clotheid 
+        $q1="SELECT clothe.clothetype, clothe.location,clothe.clotheid,clothe.clotheimg,clothe.clothedetail FROM clothe , clothespress WHERE openid='".$openid."' AND clothe.clotheid=clothespress.clotheid 
         AND clothe.location='".$location."' AND (";
         $q2="1";
         $q3="1";
@@ -135,4 +138,9 @@ class ClotheModel extends CI_Model
         return $query->result_array();
 
     }
+    public function getSeasonClothe($openid, $seasonkey){
+        $query=$this->db->query("SELECT clothe.clotheid as cid,clothe.clotheimg as img FROM clothe , clothespress WHERE openid='".$openid."' AND clothe.clotheid=clothespress.clotheid AND clothe.location=0 AND clothe.clotheseason='".$seasonkey."'ORDER BY clothe.clothestar DESC LIMIT 0,6");
+        return $query->result_array();
+    }
+
 }

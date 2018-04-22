@@ -149,7 +149,7 @@ Page({
           var likeCount = new Array();
           var cateItems = that.data.cateItems;
           var likeItems = that.data.likeItems;
-          for (var i = 0; i < 6; i++) {
+          for (var i = 0; i < 7; i++) {
             cateItems[i].children = new Array();
             cateItems[i].ishaveChild = false;
             likeItems[i].children = new Array();
@@ -159,7 +159,7 @@ Page({
             likeArray[i] = new Array();
             likeCount[i] = 0;
           }
-
+          console.log(alldata) 
           for (var i in alldata) {
             var item = alldata[i]
             if (item.location == 0) {
@@ -304,7 +304,7 @@ Page({
           var likeCount = new Array();
           var cateItems = that.data.cateItems;
           var likeItems = that.data.likeItems;
-          for (var i = 0; i < 6; i++) {
+          for (var i = 0; i < 7; i++) {
             cateItems[i].children = new Array();
             cateItems[i].ishaveChild = false;
             likeItems[i].children = new Array();

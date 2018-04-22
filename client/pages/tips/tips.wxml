@@ -1,0 +1,19 @@
+<view class="selection">
+  <view>
+    <text class="mytext" >使用须知</text>
+  </view>
+
+  <view>
+    <text class="text"> 1. 第一次上传衣物时yige要唤醒沉睡的神兽，需要等久一点哦 ^_^ </text>
+    <text class="text"> 2. 使用图片上传时，图片背景色越单一，图片比例越接近1:1，识别结果会越准确哦 (ง •_•)ง </text>
+    <view class="img">
+      <image src="../../images/7.jpg" />
+    </view>
+    <text class="text"> 3. 链接上传功能支持淘宝网页链接和淘口令两种格式 </text>
+    <text class="text"> 4. 衣物上传后不能马上看到推荐搭配，请稍等一会儿再次点开就可以看到啦 ˉ▽ˉ </text>
+    <text class="text"> 5. 如果推荐搭配结果不满意，可能是您的衣服太少了哟，多添加几件衣物试试吧 ∩_∩ </text>
+    <text class="text"> 6. 如果自动识别信息有误，您可以手动修改哦 ♥ </text>
+    <text class="text"> 7. 首页和衣橱都可以下拉刷新查看最新数据 </text>
+  </view>
+
+</view>

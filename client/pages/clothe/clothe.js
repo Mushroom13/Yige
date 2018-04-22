@@ -129,10 +129,9 @@ Page({
     colorindex: 0,
 
     imgUrls: [
-
       {
         cid: 0,
-        img: "../../images/5.jpg",
+        img: "../../images/6.jpg",
       },
     ],
   },
@@ -341,10 +340,13 @@ Page({
           var data=res.data.data
           var recommendData = res.data.recommendData
           var imgurllist=[]
-          for (var r in recommendData) {
+          for (var i in recommendData) {
+            var r = recommendData[i]
               var imgurltemp={
-                cid: r.i,
-                img:app.globalData.hosturl+"pic/"+r.i+"/all.jpg",
+                ri: r.i,
+                rj: r.j,
+                rk: r.k,
+                img:app.globalData.picurl+"/pic/"+r.i+"/all.jpg",
               }
               imgurllist.push(imgurltemp)
           }

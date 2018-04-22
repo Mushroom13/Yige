@@ -1,53 +1,67 @@
-<view class="head">
+<!-- <view class="head">
   <view class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
-</view>
-
-<!-- <view class="selection">
-  <image  src="../../images/4.jpg" />
 </view> -->
 
+
 <view class="selection">
-  <view class="header">
-    <text class="text-header">我的衣橱</text>
-    <text class="text-all" catchtap="onTouch" id="1">全部</text>
+  
+  <view class="weathercontent">
+    <view class="weather" >
+      <image src="../../images/5.jpg" />
+    </view>
   </view>
-  <view class="content">
-    <view class="content-item" catchtap="onTouch" id="2">
-      <image src="../../images/home1.png" />
-    </view>
-    <view class="content-item" catchtap="onTouch" id="3">
-      <image src="../../images/home2.png" />
-    </view>
-    <view class="content-item" catchtap="onTouch" id="4">
-      <image src="../../images/home3.png" />
-    </view>
-    <view class="content-item" catchtap="onTouch" id="5">
-      <image src="../../images/home4.png" />
-    </view>
-    <view class="content-item" catchtap="onTouch" id="6">
-      <image src="../../images/home5.png" />
-    </view>
-    <view class="content-item" catchtap="onTouch" id="7">
-      <image src="../../images/home6.png" />
+  <view catchtap="onTouch_weather" >
+   <button class="btn" >今 天 穿 什 么</button>
+  </view>
+  <view class="weathertext">
+    <view >
+      <text class="text" decode="{{true}}"> {{city}}&nbsp;&nbsp;&nbsp;&nbsp;{{low}} - {{high}} ℃ </text>
     </view>
   </view>
 </view>
 
-<view class="selection">
-  <view class="header">
-    <text class="text-header">我的收藏</text>
-    <text class="text-all" catchtap="onTouchLike">全部</text>
+  <view class="selection">
+    <view class="header">
+      <text class="text-header">我的衣橱</text>
+      <text class="text-all" catchtap="onTouch" id="1">全部</text>
+    </view>
+    <view class="content">
+      <view class="content-item" catchtap="onTouch" id="2">
+        <image src="../../images/home1.png" />
+      </view>
+      <view class="content-item" catchtap="onTouch" id="3">
+        <image src="../../images/home2.png" />
+      </view>
+      <view class="content-item" catchtap="onTouch" id="4">
+        <image src="../../images/home3.png" />
+      </view>
+      <view class="content-item" catchtap="onTouch" id="5">
+        <image src="../../images/home4.png" />
+      </view>
+      <view class="content-item" catchtap="onTouch" id="6">
+        <image src="../../images/home5.png" />
+      </view>
+      <view class="content-item" catchtap="onTouch" id="7">
+        <image src="../../images/home6.png" />
+      </view>
+    </view>
   </view>
-  <swiper indicator-dots="true" autoplay="true" interval="3000" duration="1000" circular="true" class="swiperpart">
-    <block wx:for="{{imgUrls}}">
-      <swiper-item >
-        <navigator url="../clothe/clothe?cid={{item.cid}}">
-          <image src="{{item.img}}" class="slide-image" mode="aspectFit" />
-        </navigator>
-      </swiper-item>
-    </block>
-  </swiper>
-</view>
+
+  <view class="selection">
+    <view class="header">
+      <text class="text-header">我的收藏</text>
+      <text class="text-all" catchtap="onTouchLike">全部</text>
+    </view>
+    <swiper indicator-dots="true" autoplay="true" interval="3000" duration="1000" circular="true" class="swiperpart">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <navigator url="../clothe/clothe?cid={{item.cid}}">
+            <image src="{{item.img}}" class="slide-image" mode="aspectFit" />
+          </navigator>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>

@@ -23,7 +23,96 @@ class Clothe extends CI_Controller
             'recommendData' => $recommendData
         ]);
     }
+    public function recommendDetail(){
+        $ri=$this->input->post('ri');
+        $rj=$this->input->post('rj');
+        $rk=$this->input->post('rk');
+        $openid=$this->input->post('openid');
+        $json_string = file_get_contents("result.json");
+        $resultJsonData = json_decode($json_string,true);
+        $myAllClothes=$this->ClotheModel->getAll($openid);
+        for($i=0;$i<count($myAllClothes);$i++)
+        {
+            $clothe=$myAllClothes[$i];
+            $hogtemp=explode(' ',$clothe['hog']);
+            $ihog=array();
+            foreach ($hogtemp as $f)
+            {
+                $ihog[]=floatval($f);
+            }
+            $myAllClothes[$i]['hog']=$ihog;
+        }
 
+        $recommendArray=array();
+        foreach ($resultJsonData as $t) {
+            if($t['i']==$ri && $t['j']!=$rj && $t['k']==$rk) {
+                $tempFeatureArray = array();
+                $r = $t['r'];
+                $g = $t['g'];
+                $b = $t['b'];
+                $hog = $t['hog'];
+                $type = $t['type'];
+                if ($type == 0) {
+                    $type = 3;
+                } elseif ($type == 1) {
+                    $type = 1;
+                } elseif ($type == 2) {
+                    $type = 1;
+                } elseif ($type == 3) {
+                    $type = 0;
+                } elseif ($type == 4) {
+                    $type = 0;
+                } elseif ($type == 5) {
+                    $type = 2;
+                } elseif ($type == 6) {
+                    $type = 4;
+                }
+                foreach ($myAllClothes as $clothe) {
+                    if (pow($r - $clothe['r'], 2) + pow($g - $clothe['g'], 2) + pow($b - $clothe['b'], 2) <= 3000 && $type == $clothe['clothetype']) {
+                        $distance = 0;
+                        $tempFeature = array();
+                        $tempFeature['cid'] = $clothe['clotheid'];
+                        $tempFeature['img'] = $clothe['clotheimg'];
+
+                        for ($i = 0; $i < 1764; $i++) {
+                            $distance += pow($hog[$i] - $clothe['hog'][$i], 2);
+                        }
+                        if($distance < 31)
+                        {
+                            $tempFeature['distance'] = $distance;
+                            $tempFeatureArray[] = $tempFeature;
+                        }
+
+                    }
+                }
+                $flen = count($tempFeatureArray) > 2 ? 3 : count($tempFeatureArray);
+                for ($i = 0; $i < $flen; $i++) {
+                    $mp = $i;
+                    for ($j = $i + 1; $j < count($tempFeatureArray); $j++) {
+                        if ($tempFeatureArray[$j]['distance'] < $tempFeatureArray[$mp]['distance'])
+                            $mp = $j;
+                    }
+                    $min = $tempFeatureArray[$mp];
+                    $tempFeatureArray[$mp] = $tempFeatureArray[$i];
+                    $tempFeatureArray[$i] = $min;
+                }
+                if($flen!=0)
+                    $recommendArray[] = array_slice($tempFeatureArray, 0, $flen);
+
+            }
+        }
+        if (count($recommendArray) != 0) {
+            $this->json([
+                'code'=>1,
+                'recommends' => $recommendArray
+            ]);
+        } else {
+            $this->json([
+                'code'=>0,
+                'error'=>'你衣服太少了'
+            ]);
+        }
+    }
     private function getColorNum($filepath)
     {
         if (substr($filepath, 0, strlen('png')) === 'png') {
@@ -33,8 +122,8 @@ class Clothe extends CI_Controller
         $g=0;
         $b=0;
         $pointNum=0;
-        for ($x = intval(imagesx($i) * 0.2); $x < intval(imagesx($i) * 0.8); $x++) {
-            for ($y = intval(imagesy($i) * 0.2); $y < intval(imagesy($i) * 0.8); $y++) {
+        for ($x = intval(imagesx($i) * 0.25); $x < intval(imagesx($i) * 0.75); $x++) {
+            for ($y = intval(imagesy($i) * 0.25); $y < intval(imagesy($i) * 0.75); $y++) {
                 $rgb  = imagecolorat($i, $x, $y);
                 $r += ($rgb  >> 16) & 0xFF;
                 $g += ($rgb  >> 8) & 0xFF;
@@ -46,25 +135,54 @@ class Clothe extends CI_Controller
         $g/=$pointNum;
         $b/=$pointNum;
         $standardColor=array();
-        $standardColor[]=array(0,0,0);
-        $standardColor[]=array(255,255,255);
-        $standardColor[]=array(128,128,128);
-        $standardColor[]=array(255,0,0);
-        $standardColor[]=array(139,69,19);
-        $standardColor[]=array(255,165,0);
-        $standardColor[]=array(255,255,0);
-        $standardColor[]=array(0,128,0);
-        $standardColor[]=array(0,0,255);
-        $standardColor[]=array(128,0,128);
+        $standardColor[]=array(0,0,0);//黑0
+        $standardColor[]=array(255,255,255);//白1
+        $standardColor[]=array(128,128,128);//灰2
+        $standardColor[]=array(255,0,0);//红3
+        $standardColor[]=array(255,120,120);//红4
+        $standardColor[]=array(139,69,19);//棕5
+        $standardColor[]=array(96,36,26);//棕6
+        $standardColor[]=array(255,165,0);//橙7
+        $standardColor[]=array(255,80,0);//橙8
+        $standardColor[]=array(255,255,0);//黄9
+        $standardColor[]=array(255,255,125);//黄10
+        $standardColor[]=array(0,128,0);//绿11
+        $standardColor[]=array(0,255,0);//绿12
+        $standardColor[]=array(0,0,255);//蓝13
+        $standardColor[]=array(0,255,255);//蓝14
+        $standardColor[]=array(128,0,128);//紫15
+        $standardColor[]=array(190,70,190);//紫16
+
         $min=9999999;
         $colorNum=-1;
+        $tempColorNum=-1;
         for($i=0;$i<10;$i++){
             $temp=pow($r-$standardColor[$i][0],2)+pow($g-$standardColor[$i][1],2)+pow($b-$standardColor[$i][2],2);
             if($temp<$min){
-                $colorNum=$i;
+                $tempColorNum=$i;
                 $min=$temp;
             }
         }
+        if($tempColorNum==0)
+            $colorNum=0;
+       elseif($tempColorNum==1)
+            $colorNum=1;
+        elseif($tempColorNum==2)
+            $colorNum=2;
+        elseif($tempColorNum==3 || 4)
+            $colorNum=3;
+        elseif($tempColorNum==5 || 6)
+            $colorNum=4;
+        elseif($tempColorNum==7 || 8)
+            $colorNum=5;
+        elseif($tempColorNum==9 || 10)
+            $colorNum=6;
+        elseif($tempColorNum==11 || 12)
+            $colorNum=7;
+        elseif($tempColorNum==13 || 14)
+            $colorNum=8;
+        elseif($tempColorNum==15 || 16)
+            $colorNum=9;
 //        echo $r.' '.$g.' '.$b;
         return [$colorNum,$r,$g,$b];
     }
@@ -163,6 +281,7 @@ class Clothe extends CI_Controller
         $r=$clothe['r'];
         $g=$clothe['g'];
         $b=$clothe['b'];
+        $type=$clothe['clothetype'];
         $hog=explode(' ',$hog);
         $ihog=array();
         foreach ($hog as $f)
@@ -172,8 +291,24 @@ class Clothe extends CI_Controller
         $json_string = file_get_contents("result.json");
         $data = json_decode($json_string,true);
         $hoglist=array();
+
         foreach ($data as $t) {
-            if(pow($r-$t['r'],2)+pow($g-$t['g'],2)+pow($b-$t['b'],2)<=7000){
+            if ($t['type'] == 0) {
+                $t['type'] = 3;
+            } elseif ($t['type'] == 1) {
+                $t['type'] = 1;
+            } elseif ($t['type'] == 2) {
+                $t['type'] = 1;
+            } elseif ($t['type'] == 3) {
+                $t['type'] = 0;
+            } elseif ($t['type'] == 4) {
+                $t['type'] = 0;
+            } elseif ($t['type'] == 5) {
+                $t['type'] = 2;
+            } elseif ($t['type'] == 6) {
+                $t['type'] = 4;
+            }
+            if(pow($r-$t['r'],2)+pow($g-$t['g'],2)+pow($b-$t['b'],2)<=3000 && $type==$t['type']){
                 $hogtemp=array();
                 $hogtemp['i']=$t['i'];
                 $hogtemp['j']=$t['j'];
@@ -182,11 +317,14 @@ class Clothe extends CI_Controller
                 for($i=0;$i<1764;$i++) {
                     $distance += pow($ihog[$i] - $t['hog'][$i], 2);
                 }
-                $hogtemp['distance']=$distance;
-                $hoglist[]=$hogtemp;
+                if($distance<31)
+                {
+                    $hogtemp['distance']=$distance;
+                    $hoglist[]=$hogtemp;
+                }
             }
         }
-        for($i=0;$i<count($hoglist)-1;$i++){
+        for($i=0;$i<(count($hoglist)>2?3:count($hoglist));$i++){
             $mp=$i;
             for($j=$i+1;$j<count($hoglist);$j++){
                 if($hoglist[$j]['distance']<$hoglist[$mp]['distance'])
@@ -223,7 +361,7 @@ class Clothe extends CI_Controller
     public function getAll()
     {
         $openid = $this->input->post('openid');
-        $all = $this->ClotheModel->getAll($openid);
+        $all = $this->ClotheModel->getAll2($openid);
         $this->json([
             'code' => 1,
             'data' => $all,
@@ -257,7 +395,7 @@ class Clothe extends CI_Controller
     public function setDetail()
     {
         $clotheid = $this->input->post('clotheid');
-        $detail = $this->input->post('clothedetail');
+        $detail = htmlspecialchars($this->input->post('clothedetail'),ENT_QUOTES);
         if ($this->ClotheModel->setdetail($clotheid, $detail)) {
             echo 'true:1';
         } else {
@@ -309,10 +447,32 @@ class Clothe extends CI_Controller
         }
     }
 
+    public function getSeasonClothe()
+    {
+        $openid = $this->input->post('openid');
+        $season = $this->input->post('season');
+        if($season=='春秋装')
+            $seasonkey=0;
+        if($season=='春秋装+薄外套')
+            $seasonkey=0;
+        if($season=='夏装')
+            $seasonkey=1;
+        if($season=='冬装')
+            $seasonkey=2;
+        if($season=='冬装+外套')
+            $seasonkey=2;
+        $result = $this->ClotheModel->getSeasonClothe($openid, $seasonkey);
+        $this->json([
+            'code' => 1,
+            'data' => $result,
+            'length' => count($result)
+        ]);
+    }
+
     public function getResult()
     {
         $openid = $this->input->post('openid');
-        $value = $this->input->post('value');
+        $value = htmlspecialchars($this->input->post('value'),ENT_QUOTES);
         $location = $this->input->post('currentTab');
         $keys = explode(",", $this->input->post('keys'));
         $seasonflag = 0;
@@ -348,15 +508,18 @@ class Clothe extends CI_Controller
                 $typekey = 2;
                 $typeflag++;
             }
-            if ($key == '鞋子') {
+            if ($key == '裙子') {
                 $typekey = 3;
                 $typeflag++;
             }
-            if ($key == '其他') {
+            if ($key == '鞋子') {
                 $typekey = 4;
                 $typeflag++;
             }
-
+            if ($key == '其他') {
+                $typekey = 5;
+                $typeflag++;
+            }
             if ($key == '黑') {
                 $colorkey = 0;
                 $colorflag++;

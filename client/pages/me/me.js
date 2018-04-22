@@ -27,5 +27,10 @@ Page({
     wx.navigateTo({
       url: '../personal/personal',
     })
-  }
+  },
+ onTouchTips: function (event) {
+   wx.navigateTo({
+     url: '../tips/tips',
+   })
+ }
 })

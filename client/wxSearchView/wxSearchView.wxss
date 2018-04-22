@@ -165,6 +165,7 @@
 .weui-search-bar__cancel-btn {
   margin-left: 10px;
   line-height: 28px;
-  color: #09bb07;
+  color: #cd3b3b;
   white-space: nowrap;
+  font-size: 16px;
 }

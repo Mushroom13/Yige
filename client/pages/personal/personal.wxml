@@ -1,4 +1,4 @@
-<!--pages/personal/personal.wxml-->
+
 <view class="head">
   <image  src="../../images/4.jpg" />
 </view>

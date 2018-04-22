@@ -4,6 +4,9 @@ const app = getApp()
 var util = require('../../utils/util.js')
 Page({
   data: {
+    city:'',
+    low:'',
+    high:'',
     imgUrls: [
     
       {
@@ -49,6 +52,32 @@ Page({
           }
         }
       })
+      wx.getLocation({
+        success: ({ latitude, longitude }) => {
+          //调用后台API，获取地址信息
+          wx.request({
+            url: app.globalData.hosturl + 'analyze/getWeather',
+            method: 'POST',
+            data: {
+              latitude: latitude,
+              longitude: longitude
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: (res) => {
+              if(res.data.code==1)
+              {
+                that.setData({
+                  low: res.data.low,
+                  high: res.data.high,
+                  city: res.data.city
+                }) 
+              }
+            },
+          })
+        }
+      })
     } else {
       wx.redirectTo({
         url: '../login/login'
@@ -65,6 +94,11 @@ Page({
       url: '../all/all?currentTab=1&nowid=1'
     })
   },
+   onTouch_weather: function (event) {
+     wx.navigateTo({
+       url: '../weather/weather?ilow='+this.data.low+'&ihigh='+this.data.high,
+     })
+   },
    /**
     * 页面相关事件处理函数--监听用户下拉动作
     */

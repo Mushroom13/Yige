@@ -7,8 +7,11 @@
   color: gray;
 }
 .head{
+  height: 190px;
+  width: 100%;
   position: relative;
-  width: 80%;
+}
+.head image{
+  width: 100%;
   height: 100%;
-  padding-left: 10%;
 }
