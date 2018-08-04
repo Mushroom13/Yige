@@ -6,79 +6,85 @@ const app = getApp()
 Page({
 
   data: {
+    userInfo: {},
     logged: false
   },
-  onLoad: function () {
+  bindGetUserInfo: function (e) {
+    if (this.data.logged) return;
+
+    util.showBusy('正在登录');
+
+    var that = this;
+    var userInfo = e.detail.userInfo;
+
+    // 查看是否授权
     wx.getSetting({
-      success: res => {
+      success: function (res) {
         if (res.authSetting['scope.userInfo']) {
-          // 已经授权，调用后台接口直接获取用户信息并跳转
-          util.showBusy('正在登录')
-          qcloud.request({
-            url: config.service.requestUrl,
-            login: true,
-            success(result) {
+
+          // 检查登录是否过期
+          wx.checkSession({
+            success: function () {
+              // 登录态未过期
               util.showSuccess('登录成功')
-              console.log(result.data.data)
-              app.globalData.userInfo = result.data.data
-              app.globalData.sex = result.data.sex
-              app.globalData.age = result.data.age
+              console.log(userInfo)
+              app.globalData.userInfo = userInfo
+              app.globalData.sex = 1
+              app.globalData.age = 1
               wx.switchTab({
                 url: '../index/index'
               })
             },
 
-            fail(error) {
-              util.showModel('请求失败', error)
-              console.log('request fail', error)
-            }
-          })
-        }
-        else{
-          this.login()
+            fail: function () {
+              qcloud.clearSession();
+              // 登录态已过期，需重新登录
+              var options = {
+                encryptedData: e.detail.encryptedData,
+                iv: e.detail.iv,
+                userInfo: userInfo
+              }
+              that.doLogin(options);
+            },
+          });
+        } else {
+          util.showModel('用户未授权', e.detail.errMsg);
         }
       }
-    })
+    });
   },
-  // 用户登录示例
-  login: function () {
-    if (this.data.logged) return
+  doLogin: function (options) {
+    var that = this;
 
-    util.showBusy('正在登录')
-    var that = this
-
-    // 调用登录接口
-    qcloud.login({
-      success(result) {
-        // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
-        qcloud.request({
-          url: config.service.requestUrl,
-          login: true,
-          success(result) {
+    wx.login({
+      success: function (loginResult) {
+        var loginParams = {
+          code: loginResult.code,
+          encryptedData: options.encryptedData,
+          iv: options.iv,
+        }
+        qcloud.requestLogin({
+          loginParams, success() {
             util.showSuccess('登录成功')
-            app.globalData.userInfo = result.data.data
-            app.globalData.sex = result.data.sex
-            app.globalData.age = result.data.age
-            that.setData({
-              logged: true
-            })
-            //console.log(result)
+            app.globalData.userInfo = options.userInfo
+            app.globalData.sex = 1
+            app.globalData.age = 1
             wx.switchTab({
               url: '../index/index'
             })
           },
           fail(error) {
-            util.showModel('请求失败', error)
-            console.log('request fail', error)
+            util.showModel('登录失败', error)
+            console.log('登录失败', error)
           }
-        })
+        });
       },
-
-      fail(error) {
-        util.showModel('登录失败', error)
-        console.log('登录失败', error)
-      }
-    })
+      fail: function (loginError) {
+        util.showModel('登录失败', loginError)
+        console.log('登录失败', loginError)
+      },
+    });
   },
+  
 
 })

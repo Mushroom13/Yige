@@ -20,6 +20,12 @@
 
   <view class="selection">
     <view>
+      <text class="mytext" catchtap="onTouchMatch">我的搭配</text>
+    </view>
+  </view>
+
+  <view class="selection">
+    <view>
       <text class="mytext" catchtap="onTouchTips">使用须知</text>
     </view>
   </view>

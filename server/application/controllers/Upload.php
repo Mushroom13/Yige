@@ -24,7 +24,7 @@ class Upload extends CI_Controller {
     }
     public function uploadLink()
     {
-        $clotheUrl=htmlspecialchars($this->input->post('clotheUrl'),ENT_QUOTES);
+        $clotheUrl=$this->input->post('clotheUrl');
         $firstletter=substr($clotheUrl,0,1);
         if(preg_match("/^[a-zA-Z]+$/", $firstletter)) {
 

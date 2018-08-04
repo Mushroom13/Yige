@@ -395,7 +395,7 @@ class Clothe extends CI_Controller
     public function setDetail()
     {
         $clotheid = $this->input->post('clotheid');
-        $detail = htmlspecialchars($this->input->post('clothedetail'),ENT_QUOTES);
+        $detail = $this->input->post('clothedetail');
         if ($this->ClotheModel->setdetail($clotheid, $detail)) {
             echo 'true:1';
         } else {
@@ -472,7 +472,7 @@ class Clothe extends CI_Controller
     public function getResult()
     {
         $openid = $this->input->post('openid');
-        $value = htmlspecialchars($this->input->post('value'),ENT_QUOTES);
+        $value = $this->input->post('value');
         $location = $this->input->post('currentTab');
         $keys = explode(",", $this->input->post('keys'));
         $seasonflag = 0;

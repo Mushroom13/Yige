@@ -126,6 +126,7 @@ Page({
           },
 
           fail: function (e) {
+            console.log(e)
             util.showModel('图片加载失败')
           }
         })

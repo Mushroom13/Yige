@@ -13,7 +13,10 @@
     "pages/search/search",
     "pages/tips/tips",
     "pages/weather/weather",
-    "pages/match/match"
+    "pages/match/match",
+    "pages/mymatch/mymatch",
+    "pages/mymatchdel/mymatchdel",
+    "pages/addmatch/addmatch"
 
   ],
   "window": {

@@ -23,9 +23,14 @@ Page({
       url: '../analyze/analyze',
     })
   },
- onTouchPersonal: function (event) {
+  onTouchPersonal: function (event) {
     wx.navigateTo({
       url: '../personal/personal',
+    })
+  },
+  onTouchMatch: function(event) {
+    wx.navigateTo({
+      url: '../mymatch/mymatch',
     })
   },
  onTouchTips: function (event) {

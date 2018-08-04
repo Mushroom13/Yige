@@ -1,0 +1,30 @@
+/* pages/mymatch/mymatch.wxss */
+.header {
+ border-bottom: 1px solid #ddd;
+  height: 30px;
+  margin-top: 15px;
+  margin: 20px;
+}
+
+.text-header {
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+  color: gray;
+  font-size: 16px;
+  border-left-width: 2px;
+  border-left-style: solid;
+  border-left-color: #cd3b3b;
+}
+.addimg{
+  display: flex;
+  justify-content: center;
+}
+.addtext{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:gray;
+  font-size: 13px;
+  padding-bottom: 10px;
+}

@@ -1,0 +1,29 @@
+<!--pages/mymatch/mymatch.wxml-->
+<view>
+  <view class="header">
+    <text class="text-header">我的搭配</text>
+  </view>
+  <view>
+     <view class="addimg" catchtap="onTouchAdd">
+        <image style="width: 130px; height: 130px; " mode='aspectFill' src="../../images/add.png" />
+     </view>
+     <view class="addtext">
+      <text>添加我的自定义搭配</text>
+     </view>
+  </view>
+ 
+
+  <view catchtap="onTouch">
+     <image style="width: 130px; height: 130px; background-color: #eeeeee;" src="../../images/5.jpg" />
+  </view>
+
+  <view wx:if="{{cateItems}}"  class="weaimg">
+    <block wx:for="{{cateItems}}">
+      <view class="content-img">
+        <navigator url="../clothe/clothe?cid={{item.cid}}">
+            <image style="width: 130px; height: 130px; background-color: #eeeeee;" src="{{item.img}}" />
+        </navigator>
+      </view>
+    </block>
+  </view>
+</view>
