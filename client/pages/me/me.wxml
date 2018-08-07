@@ -1,16 +1,14 @@
 <view>
   <view class="userinfo">
-    <image  class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <!-- <image  class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image> -->
+    <view class="userinfo-avatar">
+    <open-data  type="userAvatarUrl"></open-data>
+  </view>
+    <open-data class="userinfo-nickname" type="userNickName" lang="zh_CN"></open-data>
   </view>
 </view>
 
 <view class="content">
-  <view class="selection">
-    <view>
-      <text class="mytext" catchtap="onTouchPersonal">基本信息</text>
-    </view>
-  </view>
   
   <view class="selection">
     <view>
@@ -23,7 +21,11 @@
       <text class="mytext" catchtap="onTouchMatch">我的搭配</text>
     </view>
   </view>
-
+<view class="selection">
+    <view>
+      <text class="mytext" catchtap="onTouchShare">分享穿搭</text>
+    </view>
+  </view>
   <view class="selection">
     <view>
       <text class="mytext" catchtap="onTouchTips">使用须知</text>

@@ -1,32 +1,28 @@
 <view class="selection">  
   <view class="header">
-    <text class="text-header">整体效果图</text>
+    <text class="text-header">整体效果图上传(可选)</text>
   </view>
   <view class="content">
+    <view class="content-item" bindtap="doUpload">
+      <image src="{{OriimgUrl}}" />
+    </view>
+
+    <view wx:if="{{imgUrl}}">
       <image class="newimg" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
-  </view>
-</view>
-<view class="selection">  
-  <view class="header">
-    <text class="text-header">所有小件</text>
-  </view>
-  <view class="content">
-       <view wx:if="{{cateItems}}">
-        <block wx:for="{{cateItems}}">
-          <view class="nav_right_items">
-            <!--界面跳转 -->
-            <navigator url="../clothe/clothe?cid={{item.clotheid}}">
-              <image src="{{item.clotheimg}}"></image>
-              <text>{{item.clothedetail}}</text>
-            </navigator>
-          </view>
-        </block>
+      <view wx:if="{{!upsuccess}}" class="buttoncontent">
+        <view class="btn-area">
+          <button class="buttontext" bindtap="bindButtonTap">上传</button>
+        </view>
+        <view class="btn-area">
+          <button class="buttontext" bindtap="bindButtonTap_cancle">取消</button>
+        </view>
       </view>
+    </view>
   </view>
 </view>
 <view class="selection">
   <view class="header">
-    <text class="text-header">搭配详情</text>
+    <text class="text-header">填写搭配详情</text>
   </view>
   <view class="content">
     <view class="weui-cells__title">温度</view>
@@ -56,7 +52,7 @@
     </view>
      <view class='deletepart'>
       <view class="button-sp-area">
-        <button class="weui-btn" type='warn'  bindtap="upload">删除</button>
+        <button class="weui-btn"  bindtap="upload">上传</button>
       </view>
     </view>
   </view>

@@ -1,6 +1,5 @@
 {
   "pages": [
-        
     "pages/login/login",
     "pages/index/index",
     "pages/all/all",
@@ -8,7 +7,6 @@
     "pages/me/me",
     "pages/like/like",
     "pages/upload/upload",
-    "pages/personal/personal",
     "pages/analyze/analyze",
     "pages/search/search",
     "pages/tips/tips",
@@ -16,8 +14,10 @@
     "pages/match/match",
     "pages/mymatch/mymatch",
     "pages/mymatchdel/mymatchdel",
-    "pages/addmatch/addmatch"
-
+    "pages/addmatch/addmatch",
+    "pages/addmatchpic/addmatchpic",
+    "pages/share/share",
+    "pages/sharedetail/sharedetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -51,10 +51,10 @@
       }
     ]
   },
-  "networkTimeout":{
-    "request":180000,
-    "connectSocket":180000,
-    "uploadFile":180000,
-    "downloadFile":180000
+  "networkTimeout": {
+    "request": 180000,
+    "connectSocket": 180000,
+    "uploadFile": 180000,
+    "downloadFile": 180000
   }
 }

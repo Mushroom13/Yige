@@ -3,7 +3,3 @@
   <!-- <button  class="homebutton " open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">进入首页</button>   -->
 
 </view>
-<view >
-  <button  class='startbutton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" plain style="color: #ffffff; border-color: #ffffff; " >
-  <text class="stbut" decode="{{true}}">&nbsp;&nbsp;START</text></button>
-</view>

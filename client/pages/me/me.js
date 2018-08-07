@@ -23,11 +23,7 @@ Page({
       url: '../analyze/analyze',
     })
   },
-  onTouchPersonal: function (event) {
-    wx.navigateTo({
-      url: '../personal/personal',
-    })
-  },
+
   onTouchMatch: function(event) {
     wx.navigateTo({
       url: '../mymatch/mymatch',
@@ -37,5 +33,10 @@ Page({
    wx.navigateTo({
      url: '../tips/tips',
    })
- }
+ },
+ onTouchShare: function (event) {
+    wx.navigateTo({
+      url: '../share/share',
+    })
+  }
 })

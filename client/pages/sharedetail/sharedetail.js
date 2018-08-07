@@ -1,4 +1,4 @@
-// pages/search.js
+// pages/sharedetail/sharedetail.js
 Page({
 
   /**

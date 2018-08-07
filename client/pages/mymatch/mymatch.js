@@ -21,13 +21,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that=this
     wx.request({
-      url: app.globalData.hosturl + 'clothe/getMyMatch',
+      url: app.globalData.hosturl + 'match/getMatch',
       method: 'POST',
       data: {
-        openid: app.globalData.userInfo.openId,
-        mmid: this.data.mmid,
+        uid: app.globalData.userInfo.openId,
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -64,8 +63,8 @@ Page({
     })
   },
   onTouchAdd:function(event){
-    wx.navigateTo({
-      url: '../addmatch/addmatch' + event.currentTarget.id ,
+    wx.redirectTo({
+      url: '../addmatch/addmatch?currentTab=0&nowid=' + event.currentTarget.id ,
     })
   },
   /**

@@ -4,7 +4,7 @@
     <text class="text-header">我的搭配</text>
   </view>
   <view>
-     <view class="addimg" catchtap="onTouchAdd">
+     <view class="addimg" catchtap="onTouchAdd" id="1">
         <image style="width: 130px; height: 130px; " mode='aspectFill' src="../../images/add.png" />
      </view>
      <view class="addtext">

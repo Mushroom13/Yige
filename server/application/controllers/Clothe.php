@@ -224,8 +224,12 @@ class Clothe extends CI_Controller
         }
         else {
             //$type=shell_exec('getType'); 大bug
-            $typeResult = shell_exec('./run_getType.sh /usr/local/MATLAB/MATLAB_Runtime/v91 ' . $filePath);
-            $type = intval(substr($typeResult, -1, 1));
+//            $typeResult = shell_exec('./run_getType.sh /usr/local/MATLAB/MATLAB_Runtime/v91 ' . $filePath);
+//            $type = intval(substr($typeResult, -1, 1));
+            $pyurl='http://127.0.0.1:5000/gettype?filepath='.urlencode('/var/www/yige/'.$filePath);
+
+            $type = (int)(file_get_contents($pyurl));
+
             if ($type == 0) {
                 $type = 3;
                 $season = 1;
@@ -275,6 +279,10 @@ class Clothe extends CI_Controller
         $clotheid = $this->input->post('clotheid');
         $clothe=$this->ClotheModel->getclothe($clotheid);
         $filePath = $this->input->post('filepath');
+
+//        $pyurl='http://127.0.0.1:5000/gethog?filepath='.urlencode('/var/www/yige/'.$filePath);
+//        $hog = file_get_contents($pyurl);
+//        return $hog;
         $hogResult = shell_exec('./run_getFeature.sh /usr/local/MATLAB/MATLAB_Runtime/v91 ' . $filePath);
         $hog =substr($hogResult, 315);
         $this->ClotheModel->setHog($clotheid,$hog);
@@ -468,6 +476,7 @@ class Clothe extends CI_Controller
             'length' => count($result)
         ]);
     }
+
 
     public function getResult()
     {

@@ -11,28 +11,10 @@ Page({
   data: {
     linktemp: '',
     linkinput:'',
-  },
-  onTouch: function (event) {
-    wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        var tempFilePaths = res.tempFilePaths
-        wx.uploadFile({
-          url: '', //仅为示例，非真实的接口地址
-          filePath: tempFilePaths[0],
-          name: 'file',
-          formData: {
-            'user': 'test'
-          },
-          success: function (res) {
-            var data = res.data
-            //do something
-          }
-        })
-      }
-    })
+    focus: false,
+    inputValue: '',
+    imgUrl: null,
+    OriimgUrl: "../../images/2.jpg"
   },
   /**
    * 生命周期函数--监听页面加载
@@ -146,12 +128,6 @@ Page({
     })
   },
 
-  data: {
-    focus: false,
-    inputValue: '',
-    imgUrl:null,
-    OriimgUrl: "../../images/2.jpg"
-  },
   bindButtonTap: function () {
     var that = this;
     util.showBusy('正在努力识别')
