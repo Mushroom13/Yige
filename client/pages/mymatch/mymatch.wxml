@@ -4,26 +4,37 @@
     <text class="text-header">我的搭配</text>
   </view>
   <view>
-     <view class="addimg" catchtap="onTouchAdd" id="1">
-        <image style="width: 130px; height: 130px; " mode='aspectFill' src="../../images/add.png" />
-     </view>
-     <view class="addtext">
+    <view class="addimg" catchtap="onTouchAdd" id="1">
+      <image style="width: 130px; height: 130px; " mode='aspectFill' src="../../images/add.png" />
+    </view>
+    <view class="addtext">
       <text>添加我的自定义搭配</text>
-     </view>
-  </view>
- 
-
-  <view catchtap="onTouch">
-     <image style="width: 130px; height: 130px; background-color: #eeeeee;" src="../../images/5.jpg" />
+    </view>
   </view>
 
-  <view wx:if="{{cateItems}}"  class="weaimg">
+  <view class="container">
+    <view class="nav_right">
+      <view wx:if="{{cateItems}}">
+        <block wx:for="{{cateItems}}">
+          <view class="nav_right_items">
+            <!--界面跳转 -->
+            <navigator url="../mymatchdel/mymatchdel?cid={{item.cid}}">
+              <image src="{{item.img}}"></image>
+              <text>{{item.clothedetail}}</text>
+            </navigator>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+    <!-- <view wx:if="{{cateItems}}"  class="weaimg">
     <block wx:for="{{cateItems}}">
       <view class="content-img">
-        <navigator url="../clothe/clothe?cid={{item.cid}}">
+        <navigator url="../mymatchdel/mymatchdel?cid={{item.cid}}">
             <image style="width: 130px; height: 130px; background-color: #eeeeee;" src="{{item.img}}" />
         </navigator>
       </view>
     </block>
   </view>
-</view>
+</view> -->

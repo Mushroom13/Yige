@@ -1,33 +1,30 @@
-<view class="selection">  
+<!-- <view class="selection">  
   <view class="header">
     <text class="text-header">整体效果图</text>
   </view>
   <view class="content">
       <image class="newimg" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
   </view>
-</view>
-<view class="selection">  
-  <view class="header">
-    <text class="text-header">所有小件</text>
-  </view>
-  <view class="content">
-       <view wx:if="{{cateItems}}">
-        <block wx:for="{{cateItems}}">
-          <view class="nav_right_items">
-            <!--界面跳转 -->
-            <navigator url="../clothe/clothe?cid={{item.clotheid}}">
-              <image src="{{item.clotheimg}}"></image>
-              <text>{{item.clothedetail}}</text>
-            </navigator>
-          </view>
-        </block>
-      </view>
-  </view>
-</view>
+</view> -->
+
 <view class="selection">
-  <view class="header">
-    <text class="text-header">搭配详情</text>
+    <view class="header">
+      <text class="text-header">搭配展示</text>
+    </view>
+    <swiper indicator-dots="true" autoplay="true" interval="3000" duration="1000" circular="true" class="swiperpart">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <navigator url="../clothe/clothe?cid={{item.cid}}">
+            <image src="{{item.img}}" class="slide-image" mode="aspectFit" />
+          </navigator>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
+
+
+<view class="selection">
+ 
   <view class="content">
     <view class="weui-cells__title">温度</view>
     <view class="weui-cells weui-cells_after-title">
@@ -55,6 +52,9 @@
       </view>
     </view>
      <view class='deletepart'>
+      <view class="button-sp-area">
+        <button class="weui-btn" type='warn'  bindtap="upload">分享</button>
+      </view>
       <view class="button-sp-area">
         <button class="weui-btn" type='warn'  bindtap="upload">删除</button>
       </view>

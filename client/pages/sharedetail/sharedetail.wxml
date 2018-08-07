@@ -1,2 +1,8 @@
 <!--pages/sharedetail/sharedetail.wxml-->
-<text>pages/sharedetail/sharedetail.wxml</text>
+<view class="page">
+  <view class="page__bd">
+    <view class="content-img">
+      <image style="width: 280px; height: 280px; background-color: #eeeeee;" mode="aspectFit" src="{{imgUrl}}"></image>
+    </view>
+  </view>
+</view>
