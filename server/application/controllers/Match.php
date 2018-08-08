@@ -76,4 +76,15 @@ class Match extends CI_Controller {
             'imgs' => $imgs
         ]);
     }
+
+    public function deleteMatch()
+    {
+        $sid=$this->input->post('sid');
+        $uid=$this->input->post('uid');
+        if ($this->MatchModel->deleteMatch($sid,$uid)) {
+            echo 'true:1';
+        } else {
+            echo 'false:删除失败';
+        }
+    }
 }

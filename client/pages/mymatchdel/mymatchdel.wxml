@@ -56,7 +56,7 @@
      <view class='deletepart'>
       <view class="button-sp-area">
         <button  open-type="share" class="weui-btn" type='primary'>分享</button>
-        <button class="weui-btn" type='warn'  bindtap="upload">删除</button>
+        <button class="weui-btn" type='warn'  bindtap="deleteMatch">删除</button>
       </view>
       </view>
      

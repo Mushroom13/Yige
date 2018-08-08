@@ -63,4 +63,9 @@ class MatchModel extends CI_Model
         $query=$this->db->query("select clothe.clotheid, clothe.clotheimg from matchdetail,clothe WHERE matchdetail.sid=".$sid." and matchdetail.cid=clothe.clotheid");
         return $query->result_array();
     }
+    public function deleteMatch($sid,$uid)
+    {
+
+        return $this->db->query("DELETE FROM selfmatch WHERE uid='".$uid."' AND '".$sid."'=id");
+    }
 }
