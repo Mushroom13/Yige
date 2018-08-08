@@ -23,7 +23,7 @@
   </view>
 <view class="selection">
     <view>
-      <text class="mytext" catchtap="onTouchShare">分享穿搭</text>
+      <text class="mytext" catchtap="onTouchBBS">穿搭圈</text>
     </view>
   </view>
   <view class="selection">

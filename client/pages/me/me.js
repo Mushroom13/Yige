@@ -36,7 +36,7 @@ Page({
  },
  onTouchShare: function (event) {
     wx.navigateTo({
-      url: '../share/share',
+      url: '../bbs/bbs',
     })
   }
 })

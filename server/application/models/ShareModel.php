@@ -23,5 +23,9 @@ class ShareModel extends CI_Model
         $sid = $this->db->insert_id();
         return $sid;
     }
-
+    public function getShare($sid)
+    {
+        $query = $this->db->get_where('share', array('id' => $sid));
+        return $query->row_array();
+    }
 }

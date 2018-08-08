@@ -19,4 +19,10 @@ class Share extends CI_Controller
         $img=$this->input->post('img');
         echo $this->ShareModel->addShare($uid,$img);
     }
+    public function getShare()
+    {
+        $sid=$this->input->post('sid');
+        $img=$this->ShareModel->getShare($sid)['img'];
+        echo $img;
+    }
 }

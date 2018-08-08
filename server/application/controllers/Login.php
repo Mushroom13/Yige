@@ -12,6 +12,24 @@ class Login extends CI_Controller {
         $this->load->model('UserModel');
     }
 
+
+    public function getOpenid()
+    {
+        $js_code = $this->input->get('code');
+        if(empty($js_code)) return array('status'=>0,'info'=>'缺少js_code');
+
+        $appid = 'wx7d40498f333efe4e';
+        $appsecret = 'a5b27a6e61645049affc9fcd7071d837';
+        $curl = 'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code';
+        $curl = sprintf($curl,$appid,$appsecret,$js_code);
+        $result = file_get_contents($curl);
+        $this->json([
+            'status' => 1,
+            'info' => json_decode($result,true)
+        ]);
+
+    }
+
     public function index() {
         $result = LoginService::login();
         
