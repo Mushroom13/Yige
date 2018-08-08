@@ -16,7 +16,8 @@
     "pages/mymatchdel/mymatchdel",
     "pages/addmatch/addmatch",
     "pages/addmatchpic/addmatchpic",
-    "pages/share/share"
+    "pages/bbs/bbs",
+    "pages/sharedetail/sharedetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

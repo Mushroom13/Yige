@@ -57,11 +57,6 @@ Page({
   
   },
 
-  onTouch: function (event) {
-    wx.navigateTo({
-      url: '../mymatchdel/mymatchdel' + event.currentTarget.id,
-    })
-  },
   onTouchAdd:function(event){
     wx.redirectTo({
       url: '../addmatch/addmatch?currentTab=0&nowid=' + event.currentTarget.id ,

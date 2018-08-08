@@ -55,7 +55,12 @@ class MatchModel extends CI_Model
 
     public function getDetail($sid)
     {
-        $query=$this->db->query("select group_concat(clotheimg) as imgs,selfmatch.img,selfmatch.weather,selfmatch.situation,selfmatch.detail from matchdetail,selfmatch,clothe WHERE selfmatch.id=".$sid." and selfmatch.id=matchdetail.sid and matchdetail.cid=clothe.clotheid group by matchdetail.sid");
+        $query = $this->db->get_where('selfmatch', array('id' => $sid));
+        return $query->result_array();
+    }
+    public function getImgs($sid)
+    {
+        $query=$this->db->query("select clothe.clotheid, clothe.clotheimg from matchdetail,clothe WHERE matchdetail.sid=".$sid." and matchdetail.cid=clothe.clotheid");
         return $query->result_array();
     }
 }

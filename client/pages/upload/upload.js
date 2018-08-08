@@ -81,7 +81,7 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        util.showBusy('正在加载')
+        wx.showNavigationBarLoading()
         var filePath = res.tempFilePaths[0]
         //console.log(filePath)
         // 上传图片
@@ -91,15 +91,16 @@ Page({
           name: 'file',
 
           success: function (res) {
+            wx.hideNavigationBarLoading() //完成停止加载
             res = JSON.parse(res.data)
             console.log(res)
             if (res.code!=1)
             {
-              util.showModel('加载失败', res.error)
+              
+              util.showModel('加载失败', 'error')
             }
             else
             {
-              util.showSuccess('图片加载完成')
               that.setData({
                 imgUrl: res.data.imgUrl,
                 OriimgUrl: null
@@ -109,7 +110,8 @@ Page({
 
           fail: function (e) {
             console.log(e)
-            util.showModel('图片加载失败')
+            wx.hideNavigationBarLoading() //完成停止加载
+            util.showModel('图片加载失败','error')
           }
         })
 
@@ -130,7 +132,7 @@ Page({
 
   bindButtonTap: function () {
     var that = this;
-    util.showBusy('正在努力识别')
+    wx.showNavigationBarLoading()
     wx.request({
       url: app.globalData.hosturl + 'clothe/addClothe',
       method: 'POST',
@@ -143,11 +145,11 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
+        wx.hideNavigationBarLoading()
         console.log(res)
-        util.showSuccess('上传成功')
         res = res.data
         if (res.result != 1) {
-          util.showModel('加载失败', res.error)
+          util.showModel('加载失败', 'error')
         }
         else {
           wx.request({
@@ -188,7 +190,7 @@ Page({
     if (link!='')
     {
       var that = this;
-      util.showBusy('正在读取网页')
+      wx.showNavigationBarLoading()
       wx.request({
         url: app.globalData.hosturl + 'upload/uploadLink',
         method: 'POST',
@@ -199,14 +201,14 @@ Page({
           'content-type': 'application/x-www-form-urlencoded'
         },
         success: function (res) {
+          wx.hideNavigationBarLoading()
           res = res.data
           console.log(res)
           if (res.code != 1) {
-            util.showModel('网页读取失败', res.error)
+            util.showModel('网页读取失败', 'error')
           }
           else {
-            //上传图片
-            util.showBusy('正在上传信息')
+            wx.showNavigationBarLoading()
             wx.request({
               url: app.globalData.hosturl + 'clothe/addClothe',
               method: 'POST',
@@ -219,11 +221,11 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded'
               },
               success: function (res) {
-                util.showSuccess('上传成功')
+                wx.hideNavigationBarLoading()
                 res = res.data
                 console.log(res)
                 if (res.result != 1) {
-                  util.showModel('加载失败', res.error)
+                  util.showModel('加载失败','')
                 }
                 else {
                   wx.request({
@@ -252,6 +254,7 @@ Page({
           }
         },
         fail: function (e) {
+          wx.hideNavigationBarLoading()
           util.showModel('网页读取失败', '网页可能不存在')
         }
       })

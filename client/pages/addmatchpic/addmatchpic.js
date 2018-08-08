@@ -37,7 +37,7 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        util.showBusy('正在加载')
+        wx.showNavigationBarLoading() 
         var filePath = res.tempFilePaths[0]
         //console.log(filePath)
         // 上传图片
@@ -47,13 +47,13 @@ Page({
           name: 'file',
 
           success: function (res) {
+            wx.hideNavigationBarLoading() 
             res = JSON.parse(res.data)
             console.log(res)
             if (res.code != 1) {
               util.showModel('加载失败', res.error)
             }
             else {
-              util.showSuccess('图片加载完成')
               that.setData({
                 imgUrl: res.data.imgUrl,
                 OriimgUrl: null
@@ -63,7 +63,7 @@ Page({
 
           fail: function (e) {
             console.log(e)
-            util.showModel('图片加载失败')
+            util.showModel('图片加载失败','error')
           }
         })
 
@@ -83,7 +83,7 @@ Page({
   },
   bindButtonTap: function () {
     var that = this;
-    util.showBusy('上传中')
+    wx.showNavigationBarLoading() 
     wx.request({
       url: app.globalData.hosturl + 'match/uploadPic',
       method: 'POST',
@@ -96,7 +96,7 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        util.showSuccess('上传成功')
+        wx.hideNavigationBarLoading() 
         that.setData({
           upsuccess:true
         })
@@ -133,7 +133,7 @@ Page({
   },
   upload: function () {
     var that = this;
-    util.showBusy('上传中')
+    wx.showNavigationBarLoading() 
     console.log(that.data)
     wx.request({
       url: app.globalData.hosturl + 'match/uploaddetail',
@@ -149,7 +149,7 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        util.showSuccess('上传成功')
+        wx.hideNavigationBarLoading() 
         wx.redirectTo({
           url: '../mymatch/mymatch'
         })

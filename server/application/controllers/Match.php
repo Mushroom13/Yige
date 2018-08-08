@@ -69,9 +69,11 @@ class Match extends CI_Controller {
         //返回给用户
         $sid=$this->input->post('sid');
         $result = $this->MatchModel->getDetail($sid);
+        $imgs=$this->MatchModel->getImgs($sid);
         $this->json([
             'code' => 1,
-            'data' => $result
+            'data' => $result,
+            'imgs' => $imgs
         ]);
     }
 }

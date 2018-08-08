@@ -18,7 +18,7 @@
         <block wx:for="{{cateItems}}">
           <view class="nav_right_items">
             <!--界面跳转 -->
-            <navigator url="../mymatchdel/mymatchdel?cid={{item.cid}}">
+            <navigator url="../mymatchdel/mymatchdel?sid={{item.id}}">
               <image src="{{item.img}}"></image>
               <text>{{item.clothedetail}}</text>
             </navigator>
